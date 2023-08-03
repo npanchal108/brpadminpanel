@@ -571,19 +571,25 @@ namespace D1WebApp.DataAccessLayer.Repositories
                     getNew.PageKeywords = dynamicpage.PageKeywords;
                     getNew.PageName = dynamicpage.PageName;
                     getNew.PageTitle = dynamicpage.PageTitle;
+                    getNew.ptype = dynamicpage.PageType;
+                    getNew.imageurl = dynamicpage.ImageUrl;
+                    getNew.Sequence = dynamicpage.Sequence;
                     context.Entry(getold).CurrentValues.SetValues(getNew);
                     context.SaveChanges();
                     return true;
                 }
                 else
                 {
-                    
                     DynamicPage f12 = new DynamicPage();
                     f12.PageContent = dynamicpage.PageContent;
                     f12.PageDescription = dynamicpage.PageDescription;
                     f12.PageKeywords = dynamicpage.PageKeywords;
                     f12.PageName = dynamicpage.PageName;
-                    f12.PageTitle = dynamicpage.PageTitle;                    
+                    f12.PageTitle = dynamicpage.PageTitle;
+                    f12.ptype = dynamicpage.PageType;
+                    f12.imageurl = dynamicpage.ImageUrl;
+                    f12.CreatedDate = DateTime.Now;
+                    f12.Sequence = dynamicpage.Sequence;
                     context.DynamicPages.Add(f12);
                     context.SaveChanges();
                     return true;

@@ -11,8 +11,12 @@ using D1WebApp.Utilities.GeneralConfiguration;
 using System.IO;
 using System.Web.Hosting;
 using System.Data.Entity.Core.EntityClient;
-
 using D1WebApp.Controllers;
+using System.Net.Http;
+using System.Net;
+using System.Web.Mvc;
+using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
+using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
 
 namespace D1WebApp.BussinessLogicLayer.Controllers
 {
@@ -118,10 +122,92 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
         {
             return CompanyProfilemanager.UpdateMailtemplate(MailTemplateView);
         }
-        [HttpPost]
-        public dynamic Updatedynamicpage(dynamicpageviewmodel MailTemplateView)
+        [HttpPost, ValidateInput(false)]
+        //public dynamic Updatedynamicpage(dynamicpageviewmodel MailTemplateView)
+        public dynamic Updatedynamicpage()
         {
-            return CompanyProfilemanager.Updatesynamicpage(MailTemplateView);
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            try
+            {
+                var httpRequest = HttpContext.Current.Request;
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+
+                dynamicpageviewmodel MailTemplateView = new dynamicpageviewmodel();
+                string getid = httpRequest.Form["PageID"];
+                if (!getid.Equals("undefined") && !string.IsNullOrEmpty(getid) && !getid.Equals("null"))
+                {
+                    MailTemplateView.PageID = Convert.ToInt16(getid);
+                }
+                MailTemplateView.PageName = httpRequest.Form["PageName"];
+                MailTemplateView.PageTitle = httpRequest.Form["PageTitle"];
+                MailTemplateView.PageDescription = httpRequest.Form["PageDescription"];
+                MailTemplateView.PageKeywords = httpRequest.Form["PageKeywords"];
+                MailTemplateView.PageContent = httpRequest.Form["PageContent"];
+                MailTemplateView.PageType = httpRequest.Form["PageType"];
+                MailTemplateView.Sequence = Convert.ToInt16(httpRequest.Form["Sequence"]);
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    if (postedFile != null && postedFile.ContentLength > 0)
+                    {
+                        string memRefNo = httpRequest.Form["memRefNo"];
+                        string FileName = httpRequest.Form["FileName"];
+                        int MaxContentLength = 1024 * 1024 * 5; //Size = 5 MB
+
+                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".jpeg", ".gif", ".png" };
+                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                        var extension = ext.ToLower();
+                        if (!AllowedFileExtensions.Contains(extension))
+                        {
+
+                            var message = string.Format("Please Upload image of type .jpg,.gif,.png.");
+
+                            dict.Add("error", message);
+                            return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                        }
+                        else if (postedFile.ContentLength > MaxContentLength)
+                        {
+
+                            var message = string.Format("Please Upload a file upto 5 mb.");
+
+                            dict.Add("error", message);
+                            return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                        }
+                        else
+                        {
+                            var targetURL = D1WebApp.Utilities.GeneralConfiguration.GeneralConfiguration.CheckConfiguration("targetDirEcom");
+
+                            string targetDirectory = targetURL.ConfigurationValue + memRefNo;
+                            string UIpath = targetDirectory + "\\" + memRefNo + "Api";
+                            UIpath = UIpath + "\\Content\\Pages\\";
+
+                            var getpath = D1WebApp.Utilities.GeneralConfiguration.GeneralConfiguration.CheckConfiguration("domainpath");
+                            string getimagepath = getpath.ConfigurationValue + "/" + memRefNo + "Api" + "/Content/Pages/" + FileName.Replace(" ", "");
+                            //  where you want to attach your imageurl
+                            //if needed write the code to update the table
+                            // var filePath = HttpContext.Current.Server.MapPath(UIpath);
+                            //Userimage myfolder name where i want to save my image
+                            if (!string.IsNullOrEmpty(UIpath))
+                            {
+                                MailTemplateView.ImageUrl = getimagepath;
+                            }
+                            if (!Directory.Exists(UIpath))
+                            {
+                                Directory.CreateDirectory(UIpath);
+                            }
+                            postedFile.SaveAs(Path.Combine(UIpath, FileName.Replace(" ", "")));
+
+                        }
+                    }
+                }
+                return CompanyProfilemanager.Updatesynamicpage(MailTemplateView);
+            }
+            catch (Exception ex)
+            {
+                dict.Add("error", ex.ToString());
+                return Request.CreateResponse(HttpStatusCode.NotFound, dict);
+            }
+            
         }
         [HttpGet]
         public dynamic GetConfigByID(string memRefNo, int configid)

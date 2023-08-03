@@ -185,5 +185,15 @@ namespace D1WebApp.ClientModel
         public string C__rowids { get; set; }
         public long C__seq { get; set; }
         public string web_id { get; set; }
+        public string sc_code { get; set; }
+        public string mater_grade { get; set; }
+        public string mater_class { get; set; }
+        public string mechanic_code { get; set; }
+        public string free_freight_level { get; set; }
+        public string meta { get; set; }
+        public string title_tag { get; set; }
+        public Nullable<decimal> sq_unit_fact { get; set; }
+        public Nullable<bool> kc_round_up_in { get; set; }
+        public string meta_descr { get; set; }
     }
 }

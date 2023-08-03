@@ -60,5 +60,6 @@ namespace D1WebApp.ClientModel
         public string sa_group_label_15 { get; set; }
         public string C__rowids { get; set; }
         public long C__seq { get; set; }
+        public string meta_descr { get; set; }
     }
 }

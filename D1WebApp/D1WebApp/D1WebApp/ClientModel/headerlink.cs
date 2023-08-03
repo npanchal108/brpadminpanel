@@ -20,5 +20,7 @@ namespace D1WebApp.ClientModel
         public Nullable<int> seq { get; set; }
         public Nullable<bool> popover { get; set; }
         public string types { get; set; }
+        public Nullable<int> parent_seq { get; set; }
+        public Nullable<int> ismenu { get; set; }
     }
 }

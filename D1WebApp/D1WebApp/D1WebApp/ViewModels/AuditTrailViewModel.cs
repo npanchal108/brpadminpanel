@@ -91,6 +91,10 @@ namespace D1WebApp.BusinessLogicLayer.ViewModels
         public string PageDescription { get; set; }
         public string PageKeywords { get; set; }
         public string PageContent { get; set; }
+        public string PageType { get; set; }
+        public string ImageUrl { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int Sequence { get; set; }
     }
     public class MailTemplateViewModelNew
     {
@@ -113,6 +117,8 @@ namespace D1WebApp.BusinessLogicLayer.ViewModels
         public Nullable<bool> popover { get; set; }
         public string memRefNo { get; set; }
         public string types { get; set; }
+        public Nullable<int> parentseq { get; set; }
+        public Nullable<int> ismenu { get; set; }
 
         public static headerlink ConvertToModel(headerlinkViewModel headerlinkView)
         {
@@ -123,6 +129,8 @@ namespace D1WebApp.BusinessLogicLayer.ViewModels
             newheaderlink.popover = headerlinkView.popover;
             newheaderlink.seq = headerlinkView.seq;
             newheaderlink.types = headerlinkView.types;
+            newheaderlink.parent_seq = headerlinkView.parentseq;
+            newheaderlink.ismenu = headerlinkView.ismenu;
             return newheaderlink;
         }
     }

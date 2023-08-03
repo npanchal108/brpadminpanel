@@ -25,5 +25,7 @@ namespace D1WebApp.ClientModel
         public Nullable<bool> use_in_web_grouping { get; set; }
         public string C__rowids { get; set; }
         public long C__seq { get; set; }
+        public string alpha_sort { get; set; }
+        public string web_descr { get; set; }
     }
 }
