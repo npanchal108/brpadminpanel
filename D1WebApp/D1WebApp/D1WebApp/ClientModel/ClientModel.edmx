@@ -632,7 +632,7 @@
           <Key>
             <PropertyRef Name="PageID" />
           </Key>
-          <Property Name="PageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PageName" Type="varchar" MaxLength="500" />
           <Property Name="PageTitle" Type="varchar" MaxLength="500" />
           <Property Name="PageDescription" Type="varchar" MaxLength="500" />
@@ -641,7 +641,7 @@
           <Property Name="ptype" Type="varchar" MaxLength="500" />
           <Property Name="imageurl" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="Sequence" Type="int" />
+          <Property Name="Sequence" Type="bigint" />
         </EntityType>
         <EntityType Name="EMailTemplates">
           <Key>
