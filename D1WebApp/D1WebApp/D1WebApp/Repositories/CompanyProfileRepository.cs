@@ -300,12 +300,12 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
                 var q = (from itm in context.items
                          join waitem in context.wa_item on itm.item1 equals waitem.wa_item_item
-                         orderby waitem.wa_item_item
+                         //orderby waitem.wa_item_item
                          where itm.item1 == item
                          select new
                          {
                              Item = waitem.wa_item_item,
-                             ItemPrice = waitem.wa_item_list_price,
+                             ItemPrice = (decimal)waitem.wa_item_list_price,
                              ItemIsActive = itm.discontinued == true ? false : true,
                          }).FirstOrDefault();
                 return q;
@@ -330,6 +330,32 @@ namespace D1WebApp.DataAccessLayer.Repositories
                     context.SaveChanges();
                 }
                 flag = true;
+            }
+            catch (Exception de)
+            {
+                flag = false;
+            }
+            return flag;
+        }
+        public dynamic UpdateItemPrice(string memRefNo, string item,decimal price,bool isItemActive) {
+            bool flag = false;
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                if (!string.IsNullOrEmpty(item))
+                {
+                    var itemList = context.wa_item.Where(cp => cp.wa_item_item == item).ToList();
+                    itemList.ForEach(c => c.wa_item_list_price = price);
+                    context.SaveChanges();
+                    flag = true;
+
+                    var itemdetail = context.items.Where(cp => cp.item1 == item).FirstOrDefault();
+                    if (itemdetail != null) {
+                        itemdetail.discontinued = isItemActive == true ? false : true;
+                    }
+                    context.SaveChanges();
+                    flag = true;
+                }
             }
             catch (Exception de)
             {

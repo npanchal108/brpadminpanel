@@ -125,6 +125,11 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.DeleteItemDocByID(memRefNo, itemDocId);
         }
+        public dynamic UpdateItemPrice(string memRefNo, string item, decimal price, bool isItemActive)
+        {
+            return CompanyProfilerepository.UpdateItemPrice(memRefNo, item, price, isItemActive);
+        }
+        
         public dynamic GetConfigByID(string memRefNo, int configid)
         {
             return CompanyProfilerepository.GetConfigByID(memRefNo, configid);

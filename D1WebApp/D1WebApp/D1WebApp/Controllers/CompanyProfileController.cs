@@ -231,7 +231,11 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
         {
             return CompanyProfilemanager.DeleteItemDocByID(memRefNo, itemDocId);
         }
-        
+        [HttpGet]
+        public dynamic UpdateItemPrice(string memRefNo, string item,decimal price,bool isItemActive)
+        {
+            return CompanyProfilemanager.UpdateItemPrice(memRefNo,item, price, isItemActive);
+        }
         [HttpGet]
         public dynamic Getsafiltersort(string memRefNo, int configid)
         {
