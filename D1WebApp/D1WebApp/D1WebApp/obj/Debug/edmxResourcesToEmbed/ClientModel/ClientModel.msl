@@ -3543,5 +3543,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="itemdetails">
+      <EntityTypeMapping TypeName="ClientModel.itemdetail">
+        <MappingFragment StoreEntitySet="itemdetails">
+          <ScalarProperty Name="details_or_url" ColumnName="details_or_url" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="item" ColumnName="item" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

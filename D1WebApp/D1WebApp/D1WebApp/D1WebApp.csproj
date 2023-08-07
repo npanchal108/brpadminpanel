@@ -310,6 +310,9 @@
     <Compile Include="ClientModel\item.cs">
       <DependentUpon>ClientModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClientModel\itemdetail.cs">
+      <DependentUpon>ClientModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ClientModel\ItemSummery.cs">
       <DependentUpon>ClientModel.tt</DependentUpon>
     </Compile>
@@ -658,6 +661,7 @@
     <Compile Include="ViewModels\CompanyProfileViewModel.cs" />
     <Compile Include="ViewModels\EndUserViewModel.cs" />
     <Compile Include="ViewModels\Itemavaibi.cs" />
+    <Compile Include="ViewModels\ItemDetailsViewModel.cs" />
     <Compile Include="ViewModels\MailBoxAPIMasterViewModel.cs" />
     <Compile Include="ViewModels\MailBoxMasterViewModel.cs" />
     <Compile Include="ViewModels\MailBoxViewModel.cs" />

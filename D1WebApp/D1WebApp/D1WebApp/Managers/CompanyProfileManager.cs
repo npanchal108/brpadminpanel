@@ -38,6 +38,10 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.AddAndUpdateBanners(ClientBannerView);
         }
+        public dynamic AddUpdateItemDocument(ItemDetailsViewModel ItemDetailsViewModel)
+        {
+            return CompanyProfilerepository.AddUpdateItemDocument(ItemDetailsViewModel);
+        }
 
         public bool AddConfiguations(string UserMemRefNo, string Key, string keyvalue)
         {
@@ -88,6 +92,11 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.Getdynamicpagelist(memRefNo);
         }
+        public dynamic Getproductlist(string memRefNo)
+        {
+            return CompanyProfilerepository.Getproductlist(memRefNo);
+        }
+        
         public dynamic UpdateWebConfigsList(string memRefNo, int configid, string configkey, string configvalue)
         {
             return CompanyProfilerepository.UpdateWebConfigsList(memRefNo, configid, configkey, configvalue);
@@ -112,6 +121,10 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.Deletedynamicpage(memRefNo, pageID);
         }
+        public dynamic DeleteItemDocByID(string memRefNo, int itemDocId)
+        {
+            return CompanyProfilerepository.DeleteItemDocByID(memRefNo, itemDocId);
+        }
         public dynamic GetConfigByID(string memRefNo, int configid)
         {
             return CompanyProfilerepository.GetConfigByID(memRefNo, configid);
@@ -132,7 +145,15 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.GetdynamicpageByID(memRefNo, pageid);
         }
-
+        public dynamic GetItemDocByID(string memRefNo, string item)
+        {
+            return CompanyProfilerepository.GetItemDocByID(memRefNo, item);
+        }
+        public dynamic GetItemPriceByItem(string memRefNo, string item)
+        {
+            return CompanyProfilerepository.GetItemPriceByItem(memRefNo, item);
+        }
+        
         //public List<CompanyProfileViewModel> GetAll(string UserMemRefNo)
         //{
         //    return CompanyProfilerepository.GetAll(UserMemRefNo);

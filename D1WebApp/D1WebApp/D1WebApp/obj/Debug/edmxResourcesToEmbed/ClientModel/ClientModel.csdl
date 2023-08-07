@@ -483,6 +483,7 @@
     <EntitySet Name="warehouses" EntityType="ClientModel.warehouse" />
     <EntitySet Name="wishlistheaders" EntityType="ClientModel.wishlistheader" />
     <EntitySet Name="wishlistproducts" EntityType="ClientModel.wishlistproduct" />
+    <EntitySet Name="itemdetails" EntityType="ClientModel.itemdetail" />
   </EntityContainer>
   <ComplexType Name="GetBrandListForProductsMenu_Result">
     <Property Type="String" Name="product_line" Nullable="true" MaxLength="200" />
@@ -3791,5 +3792,15 @@
     <Property Name="WishlistID" Type="Int64" Nullable="false" />
     <Property Name="item" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="Qty" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="itemdetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="item" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="details_or_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

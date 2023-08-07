@@ -1050,6 +1050,16 @@
           <Property Name="__rowids" Type="nvarchar(max)" />
           <Property Name="__seq" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="itemdetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="item" Type="varchar" MaxLength="500" />
+          <Property Name="type" Type="varchar" MaxLength="500" />
+          <Property Name="name" Type="varchar" MaxLength="500" />
+          <Property Name="details_or_url" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="ItemSummery">
           <Key>
             <PropertyRef Name="__seq" />
@@ -2826,6 +2836,7 @@
           <EntitySet Name="it_tree_node" EntityType="Self.it_tree_node" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="it_xref" EntityType="Self.it_xref" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="itemdetails" EntityType="Self.itemdetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemSummery" EntityType="Self.ItemSummery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MailConfigs" EntityType="Self.MailConfigs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="oe_class" EntityType="Self.oe_class" Schema="dbo" store:Type="Tables" />
@@ -3363,6 +3374,7 @@
           <EntitySet Name="warehouses" EntityType="ClientModel.warehouse" />
           <EntitySet Name="wishlistheaders" EntityType="ClientModel.wishlistheader" />
           <EntitySet Name="wishlistproducts" EntityType="ClientModel.wishlistproduct" />
+          <EntitySet Name="itemdetails" EntityType="ClientModel.itemdetail" />
           </EntityContainer>
         <ComplexType Name="GetBrandListForProductsMenu_Result">
           <Property Type="String" Name="product_line" Nullable="true" MaxLength="200" />
@@ -6671,6 +6683,16 @@
           <Property Name="WishlistID" Type="Int64" Nullable="false" />
           <Property Name="item" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Qty" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="itemdetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="item" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="details_or_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -10217,6 +10239,17 @@
                 <ScalarProperty Name="item" ColumnName="item" />
                 <ScalarProperty Name="WishlistID" ColumnName="WishlistID" />
                 <ScalarProperty Name="WishlistitemID" ColumnName="WishlistitemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itemdetails">
+            <EntityTypeMapping TypeName="ClientModel.itemdetail">
+              <MappingFragment StoreEntitySet="itemdetails">
+                <ScalarProperty Name="details_or_url" ColumnName="details_or_url" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="item" ColumnName="item" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

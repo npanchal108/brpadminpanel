@@ -24,7 +24,6 @@ namespace D1WebApp.ClientModel
         public ClientEntities(string ClientEntities) : base(ClientEntities)
         {
         }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -108,6 +107,7 @@ namespace D1WebApp.ClientModel
         public virtual DbSet<warehouse> warehouses { get; set; }
         public virtual DbSet<wishlistheader> wishlistheaders { get; set; }
         public virtual DbSet<wishlistproduct> wishlistproducts { get; set; }
+        public virtual DbSet<itemdetail> itemdetails { get; set; }
     
         [DbFunction("ClientEntities", "SplitString")]
         public virtual IQueryable<SplitString_Result> SplitString(string input, string character)

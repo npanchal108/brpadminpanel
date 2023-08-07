@@ -100,7 +100,20 @@ namespace D1WebApp.DataAccessLayer.Repositories
             }
 
         }
+        public dynamic Getproductlist(string memRefNo)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                return context.items.ToList();
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "GetProductListrepo", DateTime.Now, "GetProductListrepo", ed.ToString(), "GetProductListrepo", 2);
+                return ed.InnerException.ToString();
+            }
 
+        }
         public dynamic GetHeaderlinklist(string memRefNo)
         {
             try
@@ -251,6 +264,78 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 ErrorLogs.ErrorLog(0, "GetdynamicpageByID", DateTime.Now, "GetdynamicpageByID", ed.ToString(), "GetdynamicpageByID", 2);
                 return ed.InnerException.ToString();
             }
+        }
+        public dynamic GetItemDocByID(string memRefNo, string item)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                var q = (from itm in context.items
+                         join itmdtls in context.itemdetails on itm.item1 equals itmdtls.item
+                         //join waitm in context.wa_item on itm.item1 equals waitm.wa_item_item
+                         orderby itmdtls.item
+                         where itmdtls.item == item
+                         select new
+                         {
+                             Id = itmdtls.id,
+                             Item = itmdtls.item,
+                             DocType = itmdtls.type,
+                             DocTypeName = itmdtls.name,
+                             DocTypeTextUrl = itmdtls.details_or_url,
+                             ItemIsActive = itm.discontinued,
+                             //ItemPrice = waitm.wa_item_list_price
+                         }).ToList();
+                return q;
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "GetItemDocByID", DateTime.Now, "GetItemDocByID", ed.ToString(), "GetItemDocByID", 2);
+                return ed.InnerException.ToString();
+            }
+        }
+        public dynamic GetItemPriceByItem(string memRefNo, string item)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                var q = (from itm in context.items
+                         join waitem in context.wa_item on itm.item1 equals waitem.wa_item_item
+                         orderby waitem.wa_item_item
+                         where itm.item1 == item
+                         select new
+                         {
+                             Item = waitem.wa_item_item,
+                             ItemPrice = waitem.wa_item_list_price,
+                             ItemIsActive = itm.discontinued == true ? false : true,
+                         }).FirstOrDefault();
+                return q;
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "GetItemPriceByItem", DateTime.Now, "GetItemPriceByItem", ed.ToString(), "GetItemPriceByItem", 2);
+                return ed.InnerException.ToString();
+            }
+        }
+        
+        public dynamic DeleteItemDocByID(string memRefNo, int itemDocId)
+        {
+            bool flag = false;
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                var getold = context.itemdetails.Where(cp => cp.id == itemDocId).FirstOrDefault();
+                if (getold != null)
+                {
+                    context.itemdetails.Remove(getold);
+                    context.SaveChanges();
+                }
+                flag = true;
+            }
+            catch (Exception de)
+            {
+                flag = false;
+            }
+            return flag;
         }
 
         public dynamic UpdateWebConfigsList(string memRefNo, int configid, string configkey, string configvalue)
@@ -438,7 +523,44 @@ namespace D1WebApp.DataAccessLayer.Repositories
 
         }
 
+        public dynamic AddUpdateItemDocument(ItemDetailsViewModel ItemDetailsViewModel)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(ItemDetailsViewModel.memRefNo));
+                if (ItemDetailsViewModel.ItemDocId > 0)
+                {
+                    var getold = context.itemdetails.Where(cp => cp.id == ItemDetailsViewModel.ItemDocId).FirstOrDefault();
+                    var getNew = context.itemdetails.Where(cp => cp.id == ItemDetailsViewModel.ItemDocId).FirstOrDefault();
+                    
+                    getNew.type = ItemDetailsViewModel.DocType;
+                    getNew.name = ItemDetailsViewModel.DocName;
+                    getNew.details_or_url = ItemDetailsViewModel.DocDetailsUrl;
+                    context.Entry(getold).CurrentValues.SetValues(getNew);
+                    context.SaveChanges();
+                    return true;
+                }
+                else
+                {
 
+                    itemdetail f12 = new itemdetail();
+                    f12.item = ItemDetailsViewModel.Item;
+                    f12.type = ItemDetailsViewModel.DocType;
+                    f12.name = ItemDetailsViewModel.DocName;
+                    f12.details_or_url = ItemDetailsViewModel.DocDetailsUrl;
+                  
+                    context.itemdetails.Add(f12);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "AddUpdateItemDocument", DateTime.Now, "AddUpdateItemDocument", ed.ToString(), "AddUpdateItemDocument", 2);
+                return ed.InnerException.ToString();
+            }
+
+        }
 
         public dynamic UpdateColorConfigsList(string memRefNo, int configid, string configkey, string configvalue, string OldValue)
         {

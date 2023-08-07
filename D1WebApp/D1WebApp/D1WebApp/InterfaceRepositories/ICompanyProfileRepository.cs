@@ -14,13 +14,18 @@ namespace D1WebApp.DataAccessLayer.Repositories
         dynamic Deletedynamicpage(string memRefNo, int pageID);
         dynamic Updatesynamicpage(dynamicpageviewmodel dynamicpage);
         dynamic GetdynamicpageByID(string memRefNo, int pageID);
+        dynamic GetItemDocByID(string memRefNo, string item);
+        dynamic GetItemPriceByItem(string memRefNo, string item);
+        dynamic DeleteItemDocByID(string memRefNo, int itemDocId);
         dynamic Getdynamicpagelist(string memRefNo);
+        dynamic Getproductlist(string memRefNo);
         dynamic GetActivitylogsearch(activitylogviewmodel activitylogview);
         dynamic DeletesafiltersortByID(string memRefNo, int linkid);
         bool AddConfigurationforapi(string UserMemRefNo, string ApiEndPoint, string AuthonticationToken, string client, string company, string username, string password);
         dynamic GetBannerDetailsByID(string memRefNo, int bannerID);
         dynamic GetBannerListforClient(string memRefNo);
         dynamic AddAndUpdateBanners(ClientBannerViewModel ClientBannerView);
+        dynamic AddUpdateItemDocument(ItemDetailsViewModel ItemDetailsViewModel);
         dynamic GetMailTemplateList(string memRefNo);
         dynamic GetMailTemplateByID(string memRefNo, int MailTemplateID);
         dynamic UpdateMailTemplate(MailTemplateViewModelNew MailTemplateView);
