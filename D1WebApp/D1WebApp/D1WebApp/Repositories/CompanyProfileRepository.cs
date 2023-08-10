@@ -91,7 +91,10 @@ namespace D1WebApp.DataAccessLayer.Repositories
             try
             {
                 var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
-                return context.DynamicPages.ToList();
+                var orderedDynamicPages = context.DynamicPages
+                .OrderByDescending(page => page.PageID)
+                .ToList();
+                return orderedDynamicPages;
             }
             catch (Exception ed)
             {
@@ -100,12 +103,24 @@ namespace D1WebApp.DataAccessLayer.Repositories
             }
 
         }
-        public dynamic Getproductlist(string memRefNo)
+        public dynamic Getproductlist(string memRefNo, int pageno)
         {
             try
             {
                 var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
-                return context.items.ToList();
+                if (pageno == 0)
+                {
+                    pageno = 1;
+                }
+                int counts = (context.items.ToList().Count());
+                var GetItemList = (from itm in context.items
+                                  select new ItemListModel
+                                  {
+                                      TotalPage = counts,
+                                      item1 = itm.item1,
+                                      discontinued = itm.discontinued
+                                  }).OrderByDescending(c => c.item1).Skip((pageno - 1) * 50).Take(50).ToList();
+                return GetItemList;
             }
             catch (Exception ed)
             {

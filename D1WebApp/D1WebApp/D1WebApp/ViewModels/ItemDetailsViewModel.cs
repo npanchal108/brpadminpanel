@@ -22,4 +22,11 @@ namespace D1WebApp.BusinessLogicLayer.ViewModels
         public string Item { get; set; }
         public double Price { get; set; }
     }
+
+    public class ItemListModel
+    {
+        public string item1 { get; set; }
+        public bool? discontinued { get; set; }
+        public int TotalPage { get; set; }
+    }
 }

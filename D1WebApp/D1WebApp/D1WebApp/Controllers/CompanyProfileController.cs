@@ -106,9 +106,9 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
         }
 
         [HttpGet]
-        public dynamic Getproductlist(string UserMemRefNo)
+        public dynamic Getproductlist(string UserMemRefNo,int pageno)
         {
-            return CompanyProfilemanager.Getproductlist(UserMemRefNo);
+            return CompanyProfilemanager.Getproductlist(UserMemRefNo, pageno);
         }
 
         [HttpGet]
@@ -132,7 +132,6 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
             return CompanyProfilemanager.UpdateMailtemplate(MailTemplateView);
         }
         [HttpPost, ValidateInput(false)]
-        //public dynamic Updatedynamicpage(dynamicpageviewmodel MailTemplateView)
         public dynamic Updatedynamicpage()
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
