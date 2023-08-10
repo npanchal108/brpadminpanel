@@ -9,289 +9,289 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
-      <publishTime>10/22/2019 16:17:29</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>10/22/2019 16:17:43</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
-      <publishTime>10/22/2019 16:17:43</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
-      <publishTime>10/22/2019 16:17:29</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>08/26/2021 11:07:06</publishTime>
+      <publishTime>08/10/2023 14:53:50</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>08/26/2021 11:07:06</publishTime>
+      <publishTime>08/10/2023 14:53:50</publishTime>
     </File>
     <File Include="bin/D1WebApp.dll">
-      <publishTime>08/26/2021 11:06:47</publishTime>
+      <publishTime>08/10/2023 14:50:54</publishTime>
     </File>
     <File Include="bin/D1WebApp.pdb">
-      <publishTime>08/26/2021 11:06:47</publishTime>
+      <publishTime>08/10/2023 14:50:54</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>10/22/2019 16:17:46</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>10/22/2019 16:17:44</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
-      <publishTime>10/22/2019 16:17:47</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.DependencyCollector.dll">
-      <publishTime>10/22/2019 16:17:47</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
-      <publishTime>10/22/2019 16:17:47</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
-      <publishTime>10/22/2019 16:17:49</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Web.dll">
-      <publishTime>10/22/2019 16:17:48</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.WindowsServer.dll">
-      <publishTime>10/22/2019 16:17:48</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/Microsoft.ApplicationInsights.dll">
-      <publishTime>10/22/2019 16:17:46</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
-      <publishTime>10/22/2019 16:17:53</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Administration.dll">
-      <publishTime>03/08/2016 11:28:06</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>10/22/2019 16:17:56</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>10/22/2019 16:17:57</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/RestSharp.dll">
-      <publishTime>10/22/2019 16:17:57</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
-      <publishTime>10/22/2019 16:17:53</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe.config">
-      <publishTime>10/22/2019 16:17:53</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/csc.rsp">
-      <publishTime>10/22/2019 16:17:53</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/csi.exe">
-      <publishTime>10/22/2019 16:17:53</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/csi.rsp">
-      <publishTime>10/22/2019 16:17:53</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
-      <publishTime>10/22/2019 16:17:53</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>10/22/2019 16:17:56</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
-      <publishTime>10/22/2019 16:17:54</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
-      <publishTime>10/22/2019 16:17:54</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
-      <publishTime>10/22/2019 16:17:54</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
-      <publishTime>10/22/2019 16:17:56</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
-      <publishTime>10/22/2019 16:17:54</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/System.AppContext.dll">
-      <publishTime>10/22/2019 16:17:54</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.dll">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe.config">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.rsp">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe">
-      <publishTime>10/22/2019 16:17:55</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
-      <publishTime>10/22/2019 16:17:56</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>10/22/2019 16:17:49</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/System.Web.Cors.dll">
-      <publishTime>10/22/2019 16:17:49</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>10/22/2019 16:17:52</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/System.Web.Http.Cors.dll">
-      <publishTime>10/22/2019 16:17:50</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>10/22/2019 16:17:50</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>10/22/2019 16:17:52</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>10/22/2019 16:17:49</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>10/22/2019 16:17:49</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>10/22/2019 16:17:49</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>10/22/2019 16:17:53</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>10/22/2019 16:17:53</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>10/22/2019 16:17:53</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>10/22/2019 16:17:57</publishTime>
+      <publishTime>07/26/2023 21:53:26</publishTime>
     </File>
     <File Include="ClientModel/ClientModel.edmx.diagram">
-      <publishTime>06/17/2021 18:06:31</publishTime>
+      <publishTime>08/04/2023 01:07:47</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>10/22/2019 16:17:33</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>10/22/2019 16:17:33</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>10/22/2019 16:17:33</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>10/22/2019 16:17:30</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>10/22/2019 16:17:34</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>10/22/2019 16:17:34</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>10/22/2019 16:17:34</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>10/22/2019 16:17:34</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Models/Model1.edmx.diagram">
-      <publishTime>05/15/2020 11:34:40</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>08/26/2021 11:06:50</publishTime>
+      <publishTime>08/10/2023 14:53:44</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
-      <publishTime>10/22/2019 16:17:37</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
-      <publishTime>10/22/2019 16:17:37</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
-      <publishTime>10/22/2019 16:17:37</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.js">
-      <publishTime>10/22/2019 16:17:37</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.min.map">
-      <publishTime>10/22/2019 16:17:37</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
-      <publishTime>10/22/2019 16:17:37</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Scripts/respond.js">
-      <publishTime>10/22/2019 16:17:37</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
-      <publishTime>10/22/2019 16:17:37</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="sql_files/AdminPortal.zip">
-      <publishTime>01/06/2020 17:48:38</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="sql_files/D1WebApp.bacpac">
-      <publishTime>12/24/2019 20:33:25</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="sql_files/DistOneDB.bacpac">
       <publishTime>10/22/2019 16:17:39</publishTime>
     </File>
     <File Include="sql_files/FlowChart.zip">
-      <publishTime>10/22/2019 16:17:39</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="sql_files/OfferDetails.html">
-      <publishTime>10/22/2019 16:17:37</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="sql_files/ProductDetails.html">
-      <publishTime>10/22/2019 16:17:38</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="sql_files/script.sql">
-      <publishTime>10/22/2019 16:17:37</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="sql_files/script1.sql">
-      <publishTime>10/22/2019 16:17:38</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="sql_files/VendorPortal.zip">
-      <publishTime>10/22/2019 16:17:39</publishTime>
+      <publishTime>07/26/2023 21:53:25</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>10/22/2019 16:17:43</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>10/22/2019 16:17:43</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>10/22/2019 16:17:43</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>10/22/2019 16:17:43</publishTime>
+      <publishTime>08/03/2023 15:54:26</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>10/22/2019 16:17:43</publishTime>
+      <publishTime>07/26/2023 21:53:24</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/26/2021 11:06:48</publishTime>
+      <publishTime>08/10/2023 14:53:41</publishTime>
     </File>
   </ItemGroup>
 </Project>

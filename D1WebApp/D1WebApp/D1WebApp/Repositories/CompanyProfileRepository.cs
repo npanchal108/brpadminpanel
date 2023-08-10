@@ -587,7 +587,82 @@ namespace D1WebApp.DataAccessLayer.Repositories
             }
 
         }
-
+        public dynamic UpdateItemPriceBulk(string memRefNo, List<ItemPriceListModel> itemDetailsViewModel)
+        {
+            try 
+            { 
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                if(itemDetailsViewModel.Count > 0)
+                {
+                    foreach (var record in itemDetailsViewModel)
+                    {
+                        var existingItems = context.wa_item.Where(item => item.wa_item_item == record.Item).ToList();
+                        if (existingItems != null && existingItems.Count > 0)
+                        {
+                            foreach (var existingItem in existingItems)
+                            {
+                                existingItem.wa_item_list_price = (decimal?)record.Price;
+                            }
+                        }
+                    }
+                    context.SaveChanges();
+                    return true;
+                }
+                else 
+                {
+                    ErrorLogs.ErrorLog(0, "UpdateItemPriceBulk", DateTime.Now, "UpdateItemPriceBulk","File has no data", "UpdateItemPriceBulk", 2);
+                    return false;
+                }
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "UpdateItemPriceBulk", DateTime.Now, "UpdateItemPriceBulk", ed.ToString(), "UpdateItemPriceBulk", 2);
+                return ed.InnerException.ToString();
+            }
+        }
+        public dynamic UpdateItemDocumentBulk(string memRefNo, List<ItemDetailsViewModel> itemDocumentViewModel)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                if (itemDocumentViewModel.Count > 0)
+                {
+                    foreach (var record in itemDocumentViewModel)
+                    {
+                        var existingItems = context.itemdetails.Where(item => item.item == record.Item && item.type == record.DocType && item.name == record.DocName).ToList();
+                        if (existingItems != null && existingItems.Count > 0)
+                        {
+                            foreach (var existingItem in existingItems)
+                            {
+                                existingItem.details_or_url = record.DocDetailsUrl;
+                            }
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            itemdetail f12 = new itemdetail();
+                            f12.item = record.Item; ;
+                            f12.type= record.DocType; 
+                            f12.name = record.DocName; 
+                            f12.details_or_url = record.DocDetailsUrl;
+                            context.itemdetails.Add(f12);
+                            context.SaveChanges();
+                        }
+                    }
+                    return true;
+                }
+                else
+                {
+                    ErrorLogs.ErrorLog(0, "UpdateItemDocumentBulk", DateTime.Now, "UpdateItemDocumentBulk", "File has no data", "UpdateItemDocumentBulk", 2);
+                    return false;
+                }
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "UpdateItemDocumentBulk", DateTime.Now, "UpdateItemDocumentBulk", ed.ToString(), "UpdateItemDocumentBulk", 2);
+                return ed.InnerException.ToString();
+            }
+        }
         public dynamic UpdateColorConfigsList(string memRefNo, int configid, string configkey, string configvalue, string OldValue)
         {
             try

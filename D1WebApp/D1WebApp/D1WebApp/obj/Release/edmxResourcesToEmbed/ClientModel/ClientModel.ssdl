@@ -51,6 +51,8 @@
     <Property Name="zip" Type="varchar" MaxLength="500" />
     <Property Name="Email" Type="varchar" MaxLength="500" />
     <Property Name="cu_userid" Type="varchar" MaxLength="500" />
+    <Property Name="profileid" Type="varchar" MaxLength="500" />
+    <Property Name="iscreditcard" Type="bit" />
   </EntityType>
   <EntityType Name="CardTypes">
     <Key>
@@ -130,6 +132,22 @@
     <Property Name="crm_priority" Type="float" />
     <Property Name="__rowids" Type="varchar" MaxLength="500" />
     <Property Name="__seq" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="cu_prcitem">
+    <Key>
+      <PropertyRef Name="__seq" />
+    </Key>
+    <Property Name="company_cu" Type="nvarchar" MaxLength="500" />
+    <Property Name="cu_ref" Type="nvarchar" MaxLength="500" />
+    <Property Name="item" Type="nvarchar" MaxLength="500" />
+    <Property Name="cu_item" Type="nvarchar" MaxLength="500" />
+    <Property Name="warehouse" Type="nvarchar" MaxLength="500" />
+    <Property Name="cu_item_desc" Type="nvarchar" MaxLength="1500" />
+    <Property Name="price_flag" Type="nvarchar" MaxLength="500" />
+    <Property Name="eff_date" Type="nvarchar" MaxLength="500" />
+    <Property Name="exp_date" Type="nvarchar" MaxLength="500" />
+    <Property Name="__rowids" Type="nvarchar" MaxLength="500" />
+    <Property Name="__seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="cu_prospect">
     <Key>
@@ -605,6 +623,21 @@
     <Property Name="customerid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="methodname" Type="varchar" MaxLength="300" />
   </EntityType>
+  <EntityType Name="DynamicPages">
+    <Key>
+      <PropertyRef Name="PageID" />
+    </Key>
+    <Property Name="PageID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PageName" Type="varchar" MaxLength="500" />
+    <Property Name="PageTitle" Type="varchar" MaxLength="500" />
+    <Property Name="PageDescription" Type="varchar" MaxLength="500" />
+    <Property Name="PageKeywords" Type="varchar" MaxLength="500" />
+    <Property Name="PageContent" Type="nvarchar(max)" />
+    <Property Name="ptype" Type="varchar" MaxLength="500" />
+    <Property Name="imageurl" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="Sequence" Type="bigint" />
+  </EntityType>
   <EntityType Name="EMailTemplates">
     <Key>
       <PropertyRef Name="MailTemplateID" />
@@ -614,6 +647,7 @@
     <Property Name="MailTemplateSubject" Type="varchar" MaxLength="250" Nullable="false" />
     <Property Name="MailTemplateContent" Type="varchar(max)" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="MailType" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="errorlog">
     <Key>
@@ -638,6 +672,8 @@
     <Property Name="seq" Type="int" />
     <Property Name="popover" Type="bit" />
     <Property Name="types" Type="varchar" MaxLength="500" />
+    <Property Name="parent_seq" Type="int" />
+    <Property Name="ismenu" Type="int" />
   </EntityType>
   <EntityType Name="it_compl">
     <Key>
@@ -652,6 +688,8 @@
     <Property Name="use_in_poe" Type="bit" />
     <Property Name="warehouse" Type="varchar" MaxLength="500" />
     <Property Name="use_in_web_grouping" Type="bit" />
+    <Property Name="alpha_sort" Type="varchar" MaxLength="500" />
+    <Property Name="web_descr" Type="varchar" MaxLength="1500" />
     <Property Name="__rowids" Type="varchar" MaxLength="500" />
     <Property Name="__seq" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
@@ -685,6 +723,9 @@
     <Property Name="alpha_sort" Type="varchar" MaxLength="500" />
     <Property Name="web_descr" Type="varchar" MaxLength="1000" />
     <Property Name="web_image" Type="varchar" MaxLength="1000" />
+    <Property Name="meta_descr" Type="nvarchar(max)" />
+    <Property Name="meta" Type="nvarchar(max)" />
+    <Property Name="title_tag" Type="varchar" MaxLength="500" />
     <Property Name="__rowids" Type="varchar" MaxLength="500" />
     <Property Name="__seq" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
@@ -695,7 +736,7 @@
     <Property Name="meta" Type="varchar(max)" />
     <Property Name="title_tag" Type="varchar" MaxLength="1500" />
     <Property Name="company_it" Type="varchar" MaxLength="500" />
-    <Property Name="descr" Type="varchar" MaxLength="500" />
+    <Property Name="descr" Type="varchar" MaxLength="1500" />
     <Property Name="discount_flag" Type="bit" />
     <Property Name="force_cost" Type="bit" />
     <Property Name="maj_class" Type="varchar" MaxLength="500" />
@@ -719,7 +760,7 @@
     <Property Name="vend_generic_item" Type="varchar" MaxLength="500" />
     <Property Name="um" Type="varchar" MaxLength="500" />
     <Property Name="profile" Type="nvarchar(max)" />
-    <Property Name="web_descr" Type="varchar" MaxLength="500" />
+    <Property Name="web_descr" Type="varchar" MaxLength="1500" />
     <Property Name="web_image" Type="varchar" MaxLength="500" />
     <Property Name="sa_group_label_1" Type="varchar" MaxLength="500" />
     <Property Name="sa_group_label_2" Type="varchar" MaxLength="500" />
@@ -736,6 +777,7 @@
     <Property Name="sa_group_label_13" Type="varchar" MaxLength="500" />
     <Property Name="sa_group_label_14" Type="varchar" MaxLength="500" />
     <Property Name="sa_group_label_15" Type="varchar" MaxLength="500" />
+    <Property Name="meta_descr" Type="nvarchar(max)" />
     <Property Name="__rowids" Type="varchar" MaxLength="500" />
     <Property Name="__seq" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
@@ -777,8 +819,6 @@
     <Key>
       <PropertyRef Name="__seq" />
     </Key>
-    <Property Name="meta" Type="varchar(max)" />
-    <Property Name="title_tag" Type="varchar" MaxLength="1500" />
     <Property Name="company_it" Type="varchar" MaxLength="500" />
     <Property Name="tree_node" Type="varchar" MaxLength="500" />
     <Property Name="name" Type="varchar" MaxLength="500" />
@@ -790,18 +830,13 @@
     <Property Name="right_node" Type="numeric" Precision="18" Scale="2" />
     <Property Name="last_update" Type="varchar" MaxLength="500" />
     <Property Name="hidden" Type="bit" />
+    <Property Name="web_id" Type="nvarchar" MaxLength="500" />
+    <Property Name="meta" Type="varchar(max)" />
+    <Property Name="title_tag" Type="varchar" MaxLength="1500" />
+    <Property Name="meta_descr" Type="nvarchar(max)" />
     <Property Name="__rowids" Type="varchar" MaxLength="500" />
     <Property Name="__seq" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="web_id" Type="nvarchar" MaxLength="500" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'DistOneDB_New_1.dbo.it_tree_node_Counts' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="it_tree_node_Counts">
-          <Property Name="tree_node" Type="varchar" MaxLength="500" />
-          <Property Name="counts" Type="int" />
-          <Property Name="image" Type="varchar" MaxLength="500" />
-          <Property Name="parent" Type="int" />
-        </EntityType>-->
   <EntityType Name="it_xref">
     <Key>
       <PropertyRef Name="__seq" />
@@ -996,9 +1031,29 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.it_tree_node_Counts' does not 
     <Property Name="style_group" Type="nvarchar(max)" />
     <Property Name="auto_mrev" Type="bit" />
     <Property Name="freight_class" Type="nvarchar(max)" />
+    <Property Name="sc_code" Type="varchar" MaxLength="500" />
+    <Property Name="web_id" Type="nvarchar" MaxLength="500" />
+    <Property Name="mater_grade" Type="varchar" MaxLength="500" />
+    <Property Name="mater_class" Type="varchar" MaxLength="500" />
+    <Property Name="mechanic_code" Type="varchar" MaxLength="500" />
+    <Property Name="free_freight_level" Type="varchar" MaxLength="500" />
+    <Property Name="meta" Type="varchar" MaxLength="500" />
+    <Property Name="title_tag" Type="varchar" MaxLength="500" />
+    <Property Name="sq_unit_fact" Type="decimal" Precision="18" Scale="8" />
+    <Property Name="kc_round_up_in" Type="bit" />
+    <Property Name="meta_descr" Type="nvarchar(max)" />
     <Property Name="__rowids" Type="nvarchar(max)" />
     <Property Name="__seq" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="web_id" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="itemdetails">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="item" Type="varchar" MaxLength="500" />
+    <Property Name="type" Type="varchar" MaxLength="500" />
+    <Property Name="name" Type="varchar" MaxLength="500" />
+    <Property Name="details_or_url" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="ItemSummery">
     <Key>
@@ -1094,6 +1149,7 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.it_tree_node_Counts' does not 
     <Property Name="rounding" Type="bit" />
     <Property Name="cu_acct_class" Type="varchar" MaxLength="500" />
     <Property Name="taxable_by_state" Type="bit" />
+    <Property Name="tax_class" Type="varchar" MaxLength="500" />
     <Property Name="__rowids" Type="varchar" MaxLength="500" />
     <Property Name="__seq" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
@@ -1368,6 +1424,7 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.it_tree_node_Counts' does not 
     <Property Name="ShipTo" Type="varchar(max)" />
     <Property Name="DeliverTo" Type="varchar(max)" />
     <Property Name="ReturnURL" Type="varchar(max)" />
+    <Property Name="jsonobject" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="PunchOutTerritory">
     <Key>
@@ -1393,22 +1450,6 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.it_tree_node_Counts' does not 
     <Property Name="DefaultValues" Type="varchar" MaxLength="500" />
     <Property Name="IsDisabled" Type="bit" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_item_groupNew' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="sa_item_groupNew">
-          <Property Name="product_line" Type="varchar" MaxLength="500" />
-          <Property Name="item" Type="varchar" MaxLength="500" />
-          <Property Name="Sa_Lable" Type="varchar" MaxLength="500" />
-          <Property Name="Sa_Lable_Value" Type="varchar" MaxLength="500" />
-        </EntityType>-->
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlistNew' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="sa_productlistNew">
-          <Property Name="maj_class" Type="varchar" MaxLength="500" />
-          <Property Name="product_line" Type="varchar" MaxLength="500" />
-          <Property Name="Sa_Lable" Type="varchar" MaxLength="500" />
-          <Property Name="Sa_Lable_Value" Type="varchar" MaxLength="500" />
-        </EntityType>-->
   <EntityType Name="safilterorder">
     <Key>
       <PropertyRef Name="id" />
@@ -2216,6 +2257,9 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlistNew' does not ha
     <Property Name="retail_price" Type="varchar" MaxLength="500" />
     <Property Name="item_company_it" Type="varchar" MaxLength="500" />
     <Property Name="avg_lead_time" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="qty_transfer_req_in" Type="int" />
+    <Property Name="wa_item_qty_bo" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="wa_item_qty_po" Type="numeric" Precision="18" Scale="2" />
     <Property Name="__rowids" Type="varchar" MaxLength="500" />
     <Property Name="__seq" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
@@ -2310,22 +2354,6 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlistNew' does not ha
     <Property Name="item" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Qty" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_item_group' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="sa_item_group">
-          <Property Name="product_line" Type="nvarchar" MaxLength="500" />
-          <Property Name="item" Type="nvarchar" MaxLength="500" />
-          <Property Name="Sa_Lable" Type="nvarchar" MaxLength="4000" />
-          <Property Name="Sa_Lable_Value" Type="varchar" MaxLength="500" />
-        </EntityType>-->
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="sa_productlist">
-          <Property Name="maj_class" Type="varchar" MaxLength="500" />
-          <Property Name="product_line" Type="varchar" MaxLength="500" />
-          <Property Name="Sa_Lable" Type="nvarchar" MaxLength="4000" />
-          <Property Name="Sa_Lable_Value" Type="varchar" MaxLength="500" />
-        </EntityType>-->
   <Function Name="AdvanceSerch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="keywords" Type="varchar(max)" Mode="In" />
     <Parameter Name="keytype" Type="int" Mode="In" />
@@ -2388,6 +2416,7 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <Parameter Name="customer" Type="varchar" Mode="In" />
     <Parameter Name="company_it" Type="varchar" Mode="In" />
     <Parameter Name="company_cu" Type="varchar" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
   </Function>
   <Function Name="GetChildItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ItemName" Type="varchar" Mode="In" />
@@ -2420,6 +2449,7 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <Parameter Name="customer" Type="varchar" Mode="In" />
     <Parameter Name="company_cu" Type="varchar" Mode="In" />
     <Parameter Name="company_it" Type="varchar" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
   </Function>
   <Function Name="GetitemdetailsbyNameForXref" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ItemName" Type="varchar" Mode="In" />
@@ -2427,6 +2457,7 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <Parameter Name="customer" Type="varchar" Mode="In" />
     <Parameter Name="company_cu" Type="varchar" Mode="In" />
     <Parameter Name="company_it" Type="varchar" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
   </Function>
   <Function Name="GetItemlistforimageProcess" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="pageno" Type="int" Mode="In" />
@@ -2448,11 +2479,19 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <Parameter Name="warehouse" Type="varchar" Mode="In" />
     <Parameter Name="treenode" Type="varchar" Mode="In" />
     <Parameter Name="company_it" Type="varchar" Mode="In" />
+    <Parameter Name="customer" Type="varchar" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetMenuListForDisplayfornewtheme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="warehouse" Type="varchar" Mode="In" />
+    <Parameter Name="company_it" Type="varchar" Mode="In" />
   </Function>
   <Function Name="GetMenuListForDisplaynew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="warehouse" Type="varchar" Mode="In" />
     <Parameter Name="treenode" Type="varchar" Mode="In" />
     <Parameter Name="company_it" Type="varchar" Mode="In" />
+    <Parameter Name="customer" Type="varchar" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
   </Function>
   <Function Name="Getparenttreenode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
     <Parameter Name="tree" Type="varchar" Mode="In" />
@@ -2494,6 +2533,9 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
   </Function>
   <Function Name="Insert_AllImages_Data_Change" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="jsondata" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="Insert_cu_prcitem_Data" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="jsondata" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="Insert_cu_prospect_Data" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="jsondata" Type="nvarchar(max)" Mode="In" />
@@ -2641,6 +2683,8 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <Parameter Name="pagesize" Type="int" Mode="In" />
     <Parameter Name="company_it" Type="varchar" Mode="In" />
     <Parameter Name="company_cu" Type="varchar" Mode="In" />
+    <Parameter Name="hideunavail" Type="bit" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
   </Function>
   <Function Name="SearchAllTablesCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="words" Type="nvarchar" Mode="In" />
@@ -2648,6 +2692,19 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <Parameter Name="customer" Type="nvarchar" Mode="In" />
     <Parameter Name="company_it" Type="varchar" Mode="In" />
     <Parameter Name="company_cu" Type="varchar" Mode="In" />
+    <Parameter Name="hideunavail" Type="bit" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SearchAllTablesforheader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="words" Type="nvarchar" Mode="In" />
+    <Parameter Name="warehouse" Type="nvarchar" Mode="In" />
+    <Parameter Name="customer" Type="nvarchar" Mode="In" />
+    <Parameter Name="stype" Type="int" Mode="In" />
+    <Parameter Name="pageno" Type="int" Mode="In" />
+    <Parameter Name="pagesize" Type="int" Mode="In" />
+    <Parameter Name="company_it" Type="varchar" Mode="In" />
+    <Parameter Name="company_cu" Type="varchar" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
   </Function>
   <Function Name="SetOtherImages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_Get_sa_Lables_Filter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2672,6 +2729,8 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <Parameter Name="companyit" Type="varchar" Mode="In" />
     <Parameter Name="companycu" Type="varchar" Mode="In" />
     <Parameter Name="satagsdetails" Type="varchar(max)" Mode="In" />
+    <Parameter Name="hideunavail" Type="bit" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
   </Function>
   <Function Name="SP_GetProductListsToDisplayCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Menuname" Type="varchar" Mode="In" />
@@ -2681,6 +2740,8 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <Parameter Name="companyit" Type="varchar" Mode="In" />
     <Parameter Name="companycu" Type="varchar" Mode="In" />
     <Parameter Name="satagsdetails" Type="varchar(max)" Mode="In" />
+    <Parameter Name="hideunavail" Type="bit" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
   </Function>
   <Function Name="SplitString" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Input" Type="nvarchar(max)" Mode="In" />
@@ -2709,11 +2770,14 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <Parameter Name="customer" Type="varchar" Mode="In" />
     <Parameter Name="company_it" Type="varchar" Mode="In" />
     <Parameter Name="company_cu" Type="varchar" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
   </Function>
   <Function Name="usp_GetBrandProductWithItemCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MajClass" Type="varchar" Mode="In" />
     <Parameter Name="warehouse" Type="varchar" Mode="In" />
     <Parameter Name="company_it" Type="varchar" Mode="In" />
+    <Parameter Name="customer" Type="varchar" Mode="In" />
+    <Parameter Name="usercode" Type="varchar" Mode="In" />
   </Function>
   <Function Name="usp_GetCartItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userId" Type="varchar" Mode="In" />
@@ -2731,6 +2795,12 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <Parameter Name="RowsOfPage" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="usp_GetHelpDeskFilterData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_GetTerritoryAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_UpdateCartItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SessionID" Type="varchar" Mode="In" />
+    <Parameter Name="UserID" Type="varchar" Mode="In" />
+    <Parameter Name="subuserid" Type="varchar" Mode="In" />
+  </Function>
   <EntityContainer Name="ClientModelStoreContainer">
     <EntitySet Name="ActivityLog" EntityType="Self.ActivityLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AllImages" EntityType="Self.AllImages" Schema="dbo" store:Type="Tables" />
@@ -2741,12 +2811,14 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <EntitySet Name="CompanySettingForMulti" EntityType="Self.CompanySettingForMulti" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Configs" EntityType="Self.Configs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cu_contact" EntityType="Self.cu_contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cu_prcitem" EntityType="Self.cu_prcitem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cu_prospect" EntityType="Self.cu_prospect" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cu_shipto" EntityType="Self.cu_shipto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cu_taxmst" EntityType="Self.cu_taxmst" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cu_user" EntityType="Self.cu_user" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="customermethodname" EntityType="Self.customermethodname" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DynamicPages" EntityType="Self.DynamicPages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EMailTemplates" EntityType="Self.EMailTemplates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="errorlog" EntityType="Self.errorlog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="headerlinks" EntityType="Self.headerlinks" Schema="dbo" store:Type="Tables" />
@@ -2759,6 +2831,7 @@ warning 6013: The table/view 'DistOneDB_New_1.dbo.sa_productlist' does not have 
     <EntitySet Name="it_tree_node" EntityType="Self.it_tree_node" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="it_xref" EntityType="Self.it_xref" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="itemdetails" EntityType="Self.itemdetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ItemSummery" EntityType="Self.ItemSummery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MailConfigs" EntityType="Self.MailConfigs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="oe_class" EntityType="Self.oe_class" Schema="dbo" store:Type="Tables" />

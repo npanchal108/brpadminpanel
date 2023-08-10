@@ -18,6 +18,8 @@ using System.Web.Mvc;
 using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
 using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
 using System.Web.UI.WebControls;
+using D1WebApp.ClientModel;
+using System.Globalization;
 
 namespace D1WebApp.BussinessLogicLayer.Controllers
 {
@@ -186,10 +188,10 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
 
                             string targetDirectory = targetURL.ConfigurationValue + memRefNo;
                             string UIpath = targetDirectory + "\\" + memRefNo + "Api";
-                            UIpath = UIpath + "\\Content\\Pages\\";
+                            UIpath = UIpath + "\\Content\\DynamicPages\\";
 
                             var getpath = D1WebApp.Utilities.GeneralConfiguration.GeneralConfiguration.CheckConfiguration("domainpath");
-                            string getimagepath = getpath.ConfigurationValue + "/" + memRefNo + "Api" + "/Content/Pages/" + FileName.Replace(" ", "");
+                            string getimagepath = getpath.ConfigurationValue + "/" + memRefNo + "Api" + "/Content/DynamicPages/" + FileName.Replace(" ", "") + "?v=" + DateTime.Now.ToShortDateString();
                             //  where you want to attach your imageurl
                             //if needed write the code to update the table
                             // var filePath = HttpContext.Current.Server.MapPath(UIpath);
@@ -272,7 +274,163 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
         {
             return CompanyProfilemanager.GetItemPriceByItem(memRefNo, item);
         }
+        [HttpPost]
+        public dynamic UpdateItemPriceList()
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            try
+            {
+                var httpRequest = HttpContext.Current.Request;
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
 
+                List<ItemPriceListModel> priceList = new List<ItemPriceListModel>();
+
+                var memRefNo = httpRequest.Form["memRefNo"];
+
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    if (postedFile != null && postedFile.ContentLength > 0)
+                    {
+                        string FileName = httpRequest.Form["FileName"];
+
+                        IList<string> AllowedFileExtensions = new List<string> { ".csv"};
+                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                        var extension = ext.ToLower();
+                        if (!AllowedFileExtensions.Contains(extension))
+                        {
+                            var message = string.Format("Please Upload csv file");
+                            dict.Add("error", message);
+                            return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                        }
+                        else
+                        {
+                            priceList = ReadCsvDataForItemPrice(postedFile.InputStream);
+                        }
+                    }
+                }
+                return CompanyProfilemanager.UpdateItemPriceBulk(memRefNo, priceList);
+            }
+            catch (Exception ex)
+            {
+                //var res = string.Format("some Message");
+                dict.Add("error", ex.ToString());
+                return Request.CreateResponse(HttpStatusCode.NotFound, dict);
+            }
+        }
+        private List<ItemPriceListModel> ReadCsvDataForItemPrice(Stream inputStream)
+        {
+            var records = new List<ItemPriceListModel>();
+
+            using (var reader = new StreamReader(inputStream))
+            {
+                bool isFirstLine = true;
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    if (string.IsNullOrEmpty(line))
+                        continue;
+
+                    if (isFirstLine)
+                    {
+                        isFirstLine = false;
+                        continue; // Skip the header line
+                    }
+
+                    var values = line.Split(',');
+                    if (values.Length >= 2)
+                    {
+                        var itemPriceListModel = new ItemPriceListModel
+                        {
+                            Item = values[0],
+                            Price = (double)decimal.Parse(values[1])
+                        };
+                        records.Add(itemPriceListModel);
+                    }
+                }
+            }
+            return records;
+        }
+
+        [HttpPost]
+        public dynamic UpdateItemDocumentList()
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            try
+            {
+                var httpRequest = HttpContext.Current.Request;
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+
+                List<ItemDetailsViewModel> documentList = new List<ItemDetailsViewModel>();
+
+                var memRefNo = httpRequest.Form["memRefNo"];
+
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    if (postedFile != null && postedFile.ContentLength > 0)
+                    {
+                        string FileName = httpRequest.Form["FileName"];
+
+                        IList<string> AllowedFileExtensions = new List<string> { ".csv" };
+                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                        var extension = ext.ToLower();
+                        if (!AllowedFileExtensions.Contains(extension))
+                        {
+                            var message = string.Format("Please Upload csv file");
+                            dict.Add("error", message);
+                            return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                        }
+                        else
+                        {
+                            documentList = ReadCsvDataForItemDocument(postedFile.InputStream);
+                        }
+                    }
+                }
+                return CompanyProfilemanager.UpdateItemDocumentBulk(memRefNo, documentList);
+            }
+            catch (Exception ex)
+            {
+                //var res = string.Format("some Message");
+                dict.Add("error", ex.ToString());
+                return Request.CreateResponse(HttpStatusCode.NotFound, dict);
+            }
+        }
+        private List<ItemDetailsViewModel> ReadCsvDataForItemDocument(Stream inputStream)
+        {
+            var records = new List<ItemDetailsViewModel>();
+
+            using (var reader = new StreamReader(inputStream))
+            {
+                bool isFirstLine = true;
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    if (string.IsNullOrEmpty(line))
+                        continue;
+
+                    if (isFirstLine)
+                    {
+                        isFirstLine = false;
+                        continue; // Skip the header line
+                    }
+
+                    var values = line.Split(',');
+                    if (values.Length >= 2)
+                    {
+                        var ItemDocDetailsViewModel = new ItemDetailsViewModel
+                        {
+                            Item = values[0],
+                            DocType = values[1],
+                            DocName = values[2],
+                            DocDetailsUrl = values[3],
+                        };
+                        records.Add(ItemDocDetailsViewModel);
+                    }
+                }
+            }
+            return records;
+        }
         [HttpPost]
         public dynamic UpdateItemDocument()
         {
@@ -330,10 +488,10 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
 
                                 string targetDirectory = targetURL.ConfigurationValue + ItemDetailsViewModel.memRefNo;
                                 string UIpath = targetDirectory + "\\" + ItemDetailsViewModel.memRefNo + "Api";
-                                UIpath = UIpath + "\\Content\\Pages\\";
+                                UIpath = UIpath + "\\Content\\ItemDetails\\";
 
                                 var getpath = D1WebApp.Utilities.GeneralConfiguration.GeneralConfiguration.CheckConfiguration("domainpath");
-                                string getimagepath = getpath.ConfigurationValue + "/" + ItemDetailsViewModel.memRefNo + "Api" + "/Content/Item/" + FileName.Replace(" ", "") + "?v=" + DateTime.Now.ToShortDateString();
+                                string getimagepath = getpath.ConfigurationValue + "/" + ItemDetailsViewModel.memRefNo + "Api" + "/Content/ItemDetails/" + FileName.Replace(" ", "") + "?v=" + DateTime.Now.ToShortDateString();
                                 //  where you want to attach your imageurl
                                 //if needed write the code to update the table
                                 // var filePath = HttpContext.Current.Server.MapPath(UIpath);

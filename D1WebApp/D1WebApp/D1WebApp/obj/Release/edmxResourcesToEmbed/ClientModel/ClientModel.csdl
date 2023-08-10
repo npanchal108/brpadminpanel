@@ -27,6 +27,7 @@
       <Parameter Name="customer" Mode="In" Type="String" />
       <Parameter Name="company_it" Mode="In" Type="String" />
       <Parameter Name="company_cu" Mode="In" Type="String" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetcustomerListbySalesman" ReturnType="Collection(ClientModel.GetcustomerListbySalesman_Result)">
       <Parameter Name="salesman" Mode="In" Type="String" />
@@ -36,6 +37,8 @@
       <Parameter Name="warehouse" Mode="In" Type="String" />
       <Parameter Name="treenode" Mode="In" Type="String" />
       <Parameter Name="company_it" Mode="In" Type="String" />
+      <Parameter Name="customer" Mode="In" Type="String" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="Gettreenodeforadvancesearch" ReturnType="Collection(ClientModel.Gettreenodeforadvancesearch_Result)">
       <Parameter Name="company_it" Mode="In" Type="String" />
@@ -162,6 +165,8 @@
       <Parameter Name="pagesize" Mode="In" Type="Int32" />
       <Parameter Name="company_it" Mode="In" Type="String" />
       <Parameter Name="company_cu" Mode="In" Type="String" />
+      <Parameter Name="hideunavail" Mode="In" Type="Boolean" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="usp_GetCartItems" ReturnType="Collection(ClientModel.usp_GetCartItems_Result)">
       <Parameter Name="userId" Mode="In" Type="String" />
@@ -174,11 +179,14 @@
       <Parameter Name="customer" Mode="In" Type="String" />
       <Parameter Name="company_it" Mode="In" Type="String" />
       <Parameter Name="company_cu" Mode="In" Type="String" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="usp_GetBrandProductWithItemCount" ReturnType="Collection(ClientModel.usp_GetBrandProductWithItemCount_Result)">
       <Parameter Name="MajClass" Mode="In" Type="String" />
       <Parameter Name="warehouse" Mode="In" Type="String" />
       <Parameter Name="company_it" Mode="In" Type="String" />
+      <Parameter Name="customer" Mode="In" Type="String" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="ClearAllTables" />
     <FunctionImport Name="Insert_sy_contact_Data">
@@ -189,6 +197,8 @@
       <Parameter Name="warehouse" Mode="In" Type="String" />
       <Parameter Name="treenode" Mode="In" Type="String" />
       <Parameter Name="company_it" Mode="In" Type="String" />
+      <Parameter Name="customer" Mode="In" Type="String" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_GetProductListsToDisplay" ReturnType="Collection(ClientModel.SP_GetProductListsToDisplay_Result)">
       <Parameter Name="Menuname" Mode="In" Type="String" />
@@ -201,6 +211,8 @@
       <Parameter Name="companyit" Mode="In" Type="String" />
       <Parameter Name="companycu" Mode="In" Type="String" />
       <Parameter Name="satagsdetails" Mode="In" Type="String" />
+      <Parameter Name="hideunavail" Mode="In" Type="Boolean" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetSitemapdata" ReturnType="Collection(String)" />
     <FunctionImport Name="GetitemdetailsbyName" ReturnType="Collection(ClientModel.GetitemdetailsbyName_Result)">
@@ -209,6 +221,7 @@
       <Parameter Name="customer" Mode="In" Type="String" />
       <Parameter Name="company_cu" Mode="In" Type="String" />
       <Parameter Name="company_it" Mode="In" Type="String" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetItemlistforimageProcess" ReturnType="Collection(String)">
       <Parameter Name="pageno" Mode="In" Type="Int32" />
@@ -271,6 +284,8 @@
       <Parameter Name="companyit" Mode="In" Type="String" />
       <Parameter Name="companycu" Mode="In" Type="String" />
       <Parameter Name="satagsdetails" Mode="In" Type="String" />
+      <Parameter Name="hideunavail" Mode="In" Type="Boolean" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="createatreetable" />
     <FunctionImport Name="CreatenewItemSummery" />
@@ -295,6 +310,8 @@
       <Parameter Name="customer" Mode="In" Type="String" />
       <Parameter Name="company_it" Mode="In" Type="String" />
       <Parameter Name="company_cu" Mode="In" Type="String" />
+      <Parameter Name="hideunavail" Mode="In" Type="Boolean" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="DeleteCuUserShipMapping">
       <Parameter Name="userid" Mode="In" Type="String" />
@@ -308,6 +325,7 @@
       <Parameter Name="customer" Mode="In" Type="String" />
       <Parameter Name="company_cu" Mode="In" Type="String" />
       <Parameter Name="company_it" Mode="In" Type="String" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="InsertCuUserShipMapping">
       <Parameter Name="userid" Mode="In" Type="String" />
@@ -354,6 +372,39 @@
     <FunctionImport Name="removesfromend">
       <Parameter Name="String" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="GetActivityLog" ReturnType="Collection(ClientModel.GetActivityLog_Result)">
+      <Parameter Name="logtype" Mode="In" Type="String" />
+      <Parameter Name="searchkeyword" Mode="In" Type="String" />
+      <Parameter Name="custid" Mode="In" Type="String" />
+      <Parameter Name="subuserid" Mode="In" Type="String" />
+      <Parameter Name="clientip" Mode="In" Type="String" />
+      <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+      <Parameter Name="todate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetMenuListForDisplayfornewtheme">
+      <Parameter Name="warehouse" Mode="In" Type="String" />
+      <Parameter Name="company_it" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Insert_cu_prcitem_Data">
+      <Parameter Name="jsondata" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SearchAllTablesforheader">
+      <Parameter Name="words" Mode="In" Type="String" />
+      <Parameter Name="warehouse" Mode="In" Type="String" />
+      <Parameter Name="customer" Mode="In" Type="String" />
+      <Parameter Name="stype" Mode="In" Type="Int32" />
+      <Parameter Name="pageno" Mode="In" Type="Int32" />
+      <Parameter Name="pagesize" Mode="In" Type="Int32" />
+      <Parameter Name="company_it" Mode="In" Type="String" />
+      <Parameter Name="company_cu" Mode="In" Type="String" />
+      <Parameter Name="usercode" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetTerritoryAccount" ReturnType="Collection(ClientModel.usp_GetTerritoryAccount_Result)" />
+    <FunctionImport Name="usp_UpdateCartItems">
+      <Parameter Name="SessionID" Mode="In" Type="String" />
+      <Parameter Name="UserID" Mode="In" Type="String" />
+      <Parameter Name="subuserid" Mode="In" Type="String" />
+    </FunctionImport>
     <EntitySet Name="ActivityLogs" EntityType="ClientModel.ActivityLog" />
     <EntitySet Name="AllImages" EntityType="ClientModel.AllImage" />
     <EntitySet Name="businesstypes" EntityType="ClientModel.businesstype" />
@@ -363,12 +414,14 @@
     <EntitySet Name="CompanySettingForMultis" EntityType="ClientModel.CompanySettingForMulti" />
     <EntitySet Name="Configs" EntityType="ClientModel.Config" />
     <EntitySet Name="cu_contact" EntityType="ClientModel.cu_contact" />
+    <EntitySet Name="cu_prcitem" EntityType="ClientModel.cu_prcitem" />
     <EntitySet Name="cu_prospect" EntityType="ClientModel.cu_prospect" />
     <EntitySet Name="cu_shipto" EntityType="ClientModel.cu_shipto" />
     <EntitySet Name="cu_taxmst" EntityType="ClientModel.cu_taxmst" />
     <EntitySet Name="cu_user" EntityType="ClientModel.cu_user" />
     <EntitySet Name="customers" EntityType="ClientModel.customer" />
     <EntitySet Name="customermethodnames" EntityType="ClientModel.customermethodname" />
+    <EntitySet Name="DynamicPages" EntityType="ClientModel.DynamicPage" />
     <EntitySet Name="EMailTemplates" EntityType="ClientModel.EMailTemplate" />
     <EntitySet Name="errorlogs" EntityType="ClientModel.errorlog" />
     <EntitySet Name="headerlinks" EntityType="ClientModel.headerlink" />
@@ -430,15 +483,7 @@
     <EntitySet Name="warehouses" EntityType="ClientModel.warehouse" />
     <EntitySet Name="wishlistheaders" EntityType="ClientModel.wishlistheader" />
     <EntitySet Name="wishlistproducts" EntityType="ClientModel.wishlistproduct" />
-    <FunctionImport Name="GetActivityLog" ReturnType="Collection(ClientModel.GetActivityLog_Result)">
-      <Parameter Name="logtype" Mode="In" Type="String" />
-      <Parameter Name="searchkeyword" Mode="In" Type="String" />
-      <Parameter Name="custid" Mode="In" Type="String" />
-      <Parameter Name="subuserid" Mode="In" Type="String" />
-      <Parameter Name="clientip" Mode="In" Type="String" />
-      <Parameter Name="fromdate" Mode="In" Type="DateTime" />
-      <Parameter Name="todate" Mode="In" Type="DateTime" />
-    </FunctionImport>
+    <EntitySet Name="itemdetails" EntityType="ClientModel.itemdetail" />
   </EntityContainer>
   <ComplexType Name="GetBrandListForProductsMenu_Result">
     <Property Type="String" Name="product_line" Nullable="true" MaxLength="200" />
@@ -1389,6 +1434,21 @@
     <Property Type="String" Name="ship_via_code" Nullable="true" MaxLength="500" />
     <Property Type="String" Name="atn" Nullable="true" MaxLength="500" />
   </ComplexType>
+  <ComplexType Name="GetActivityLog_Result">
+    <Property Type="Int64" Name="ActivityLogId" Nullable="false" />
+    <Property Type="String" Name="LogType" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="String" Name="SearchKeyword" Nullable="true" />
+    <Property Type="String" Name="CustID" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="UserId" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="ClientIP" Nullable="true" MaxLength="500" />
+    <Property Type="DateTime" Name="LogDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_GetTerritoryAccount_Result">
+    <Property Type="String" Name="customer" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="territory" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="500" />
+  </ComplexType>
   <EntityType Name="ActivityLog">
     <Key>
       <PropertyRef Name="ActivityLogId" />
@@ -1440,6 +1500,8 @@
     <Property Name="zip" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="cu_userid" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="profileid" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="iscreditcard" Type="Boolean" />
   </EntityType>
   <EntityType Name="CardType">
     <Key>
@@ -1519,6 +1581,22 @@
     <Property Name="crm_priority" Type="Double" />
     <Property Name="C__rowids" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="C__seq" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="cu_prcitem">
+    <Key>
+      <PropertyRef Name="C__seq" />
+    </Key>
+    <Property Name="company_cu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="cu_ref" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="item" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="cu_item" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="warehouse" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="cu_item_desc" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+    <Property Name="price_flag" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="eff_date" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="exp_date" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="C__rowids" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="C__seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="cu_prospect">
     <Key>
@@ -1994,6 +2072,21 @@
     <Property Name="customerid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="methodname" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="DynamicPage">
+    <Key>
+      <PropertyRef Name="PageID" />
+    </Key>
+    <Property Name="PageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PageName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="PageTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="PageDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="PageKeywords" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="PageContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ptype" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="imageurl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Sequence" Type="Int32" />
+  </EntityType>
   <EntityType Name="EMailTemplate">
     <Key>
       <PropertyRef Name="MailTemplateID" />
@@ -2003,6 +2096,7 @@
     <Property Name="MailTemplateSubject" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="MailTemplateContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="MailType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="errorlog">
     <Key>
@@ -2027,6 +2121,8 @@
     <Property Name="seq" Type="Int32" />
     <Property Name="popover" Type="Boolean" />
     <Property Name="types" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="parent_seq" Type="Int32" />
+    <Property Name="ismenu" Type="Int32" />
   </EntityType>
   <EntityType Name="it_compl">
     <Key>
@@ -2043,6 +2139,8 @@
     <Property Name="use_in_web_grouping" Type="Boolean" />
     <Property Name="C__rowids" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="C__seq" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="alpha_sort" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="web_descr" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="it_component">
     <Key>
@@ -2076,6 +2174,9 @@
     <Property Name="web_image" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
     <Property Name="C__rowids" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="C__seq" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="meta_descr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="title_tag" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="it_prodline">
     <Key>
@@ -2084,7 +2185,7 @@
     <Property Name="meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="title_tag" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
     <Property Name="company_it" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="descr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="descr" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
     <Property Name="discount_flag" Type="Boolean" />
     <Property Name="force_cost" Type="Boolean" />
     <Property Name="maj_class" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -2108,7 +2209,7 @@
     <Property Name="vend_generic_item" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="um" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="profile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="web_descr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="web_descr" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
     <Property Name="web_image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="sa_group_label_1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="sa_group_label_2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -2127,6 +2228,7 @@
     <Property Name="sa_group_label_15" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="C__rowids" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="C__seq" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="meta_descr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="it_sales_restriction">
     <Key>
@@ -2182,6 +2284,7 @@
     <Property Name="C__rowids" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="C__seq" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="web_id" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="meta_descr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="it_xref">
     <Key>
@@ -2380,6 +2483,16 @@
     <Property Name="C__rowids" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="C__seq" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="web_id" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="sc_code" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="mater_grade" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="mater_class" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="mechanic_code" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="free_freight_level" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="meta" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="title_tag" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="sq_unit_fact" Type="Decimal" Precision="18" Scale="8" />
+    <Property Name="kc_round_up_in" Type="Boolean" />
+    <Property Name="meta_descr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ItemSummery">
     <Key>
@@ -2477,6 +2590,7 @@
     <Property Name="taxable_by_state" Type="Boolean" />
     <Property Name="C__rowids" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="C__seq" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tax_class" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="ordereditem">
     <Key>
@@ -2749,6 +2863,7 @@
     <Property Name="ShipTo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="DeliverTo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="ReturnURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="jsonobject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PunchOutTerritory">
     <Key>
@@ -3581,8 +3696,11 @@
     <Property Name="retail_price" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="item_company_it" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="avg_lead_time" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="qty_transfer_req_in" Type="Int32" />
     <Property Name="C__rowids" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="C__seq" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="wa_item_qty_bo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="wa_item_qty_po" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="warehouse">
     <Key>
@@ -3675,14 +3793,14 @@
     <Property Name="item" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="Qty" Type="Int32" Nullable="false" />
   </EntityType>
-  <ComplexType Name="GetActivityLog_Result">
-    <Property Type="Int64" Name="ActivityLogId" Nullable="false" />
-    <Property Type="String" Name="LogType" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="Description" Nullable="true" />
-    <Property Type="String" Name="SearchKeyword" Nullable="true" />
-    <Property Type="String" Name="CustID" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="UserId" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="ClientIP" Nullable="true" MaxLength="500" />
-    <Property Type="DateTime" Name="LogDate" Nullable="true" Precision="23" />
-  </ComplexType>
+  <EntityType Name="itemdetail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="item" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="details_or_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

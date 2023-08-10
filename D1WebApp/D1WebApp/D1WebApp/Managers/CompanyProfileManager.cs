@@ -42,6 +42,14 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.AddUpdateItemDocument(ItemDetailsViewModel);
         }
+        public dynamic UpdateItemPriceBulk(string memRefNo, List<ItemPriceListModel> itemDetailsViewModel)
+        {
+            return CompanyProfilerepository.UpdateItemPriceBulk(memRefNo,itemDetailsViewModel);
+        }
+        public dynamic UpdateItemDocumentBulk(string memRefNo, List<ItemDetailsViewModel> itemDocuemntViewModel)
+        {
+            return CompanyProfilerepository.UpdateItemDocumentBulk(memRefNo, itemDocuemntViewModel);
+        }
 
         public bool AddConfiguations(string UserMemRefNo, string Key, string keyvalue)
         {
