@@ -160,7 +160,8 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
                     if (postedFile != null && postedFile.ContentLength > 0)
                     {
                         string memRefNo = httpRequest.Form["memRefNo"];
-                        string FileName = httpRequest.Form["FileName"];
+                        MailTemplateView.memRefNo = memRefNo;
+                       string FileName = httpRequest.Form["FileName"];
                         int MaxContentLength = 1024 * 1024 * 5; //Size = 5 MB
 
                         IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".jpeg", ".gif", ".png" };
