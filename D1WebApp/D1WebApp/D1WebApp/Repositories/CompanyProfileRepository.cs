@@ -129,6 +129,33 @@ namespace D1WebApp.DataAccessLayer.Repositories
             }
 
         }
+        public dynamic GetFilteredproductlist(string memRefNo, string filterQuery, int pageno)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                if (pageno == 0)
+                {
+                    pageno = 1;
+                }
+                int counts = (context.items.Where(c => c.item1.Contains(filterQuery)).ToList().Count());
+                var GetItemList = (from itm in context.items
+                                   select new ItemListModel
+                                   {
+                                       TotalPage = counts,
+                                       item1 = itm.item1,
+                                       discontinued = itm.discontinued
+                                   }).Where(c=> c.item1.Contains(filterQuery)).OrderByDescending(c => c.item1).Skip((pageno - 1) * 50).Take(50).ToList();
+                return GetItemList;
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "GetProductListrepo", DateTime.Now, "GetProductListrepo", ed.ToString(), "GetProductListrepo", 2);
+                return ed.InnerException.ToString();
+            }
+
+        }
+       
         public dynamic GetHeaderlinklist(string memRefNo)
         {
             try

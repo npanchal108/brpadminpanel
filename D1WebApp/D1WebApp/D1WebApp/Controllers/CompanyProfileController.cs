@@ -110,6 +110,12 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
         {
             return CompanyProfilemanager.Getproductlist(UserMemRefNo, pageno);
         }
+        [HttpGet]
+        public dynamic GetFilteredproductlist(string UserMemRefNo, string filterQuery, int pageno)
+        {
+            return CompanyProfilemanager.GetFilteredproductlist(UserMemRefNo, filterQuery, pageno);
+        }
+
 
         [HttpGet]
         public dynamic UpdateWebConfigs(string memRefNo, int configid, string configkey, string configvalue)

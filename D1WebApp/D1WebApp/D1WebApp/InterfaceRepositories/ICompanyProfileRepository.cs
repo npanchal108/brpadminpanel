@@ -19,6 +19,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
         dynamic DeleteItemDocByID(string memRefNo, int itemDocId);
         dynamic Getdynamicpagelist(string memRefNo);
         dynamic Getproductlist(string memRefNo, int pageno);
+        dynamic GetFilteredproductlist(string memRefNo, string filterQuery, int pageno);
         dynamic GetActivitylogsearch(activitylogviewmodel activitylogview);
         dynamic DeletesafiltersortByID(string memRefNo, int linkid);
         bool AddConfigurationforapi(string UserMemRefNo, string ApiEndPoint, string AuthonticationToken, string client, string company, string username, string password);

@@ -104,7 +104,13 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.Getproductlist(memRefNo, pageno);
         }
-        
+        public dynamic GetFilteredproductlist(string memRefNo, string filterQuery, int pageno)
+        {
+            return CompanyProfilerepository.GetFilteredproductlist(memRefNo, filterQuery, pageno);
+        }
+      
+
+
         public dynamic UpdateWebConfigsList(string memRefNo, int configid, string configkey, string configvalue)
         {
             return CompanyProfilerepository.UpdateWebConfigsList(memRefNo, configid, configkey, configvalue);
