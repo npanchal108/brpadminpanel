@@ -19,5 +19,6 @@ namespace D1WebApp.ClientModel
         public string type { get; set; }
         public string name { get; set; }
         public string details_or_url { get; set; }
+        public Nullable<int> sequence { get; set; }
     }
 }

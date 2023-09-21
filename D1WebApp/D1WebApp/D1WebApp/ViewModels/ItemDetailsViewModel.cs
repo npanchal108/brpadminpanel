@@ -15,6 +15,7 @@ namespace D1WebApp.BusinessLogicLayer.ViewModels
         public string DocType { get; set; }
         public string DocName { get; set; }
         public string DocDetailsUrl { get; set; }
+        public int Sequence { get; set; }
     }
 
     public class ItemPriceListModel 

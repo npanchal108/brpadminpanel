@@ -637,6 +637,7 @@
     <Property Name="imageurl" Type="nvarchar" MaxLength="500" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="Sequence" Type="bigint" />
+    <Property Name="IsActive" Type="bit" />
   </EntityType>
   <EntityType Name="EMailTemplates">
     <Key>

@@ -291,7 +291,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                                     Mobile = ur.Mobile,
                                     RoleName = ro.RoleName,
                                     UserID = ur.UserID,
-                                }).OrderByDescending(c => c.UserID).Skip((pageno - 1) * 50).Take(50).ToList();
+                                }).OrderByDescending(c => c.UserID).Skip((pageno - 1) * 15).Take(15).ToList();
             }
 
             return GetUsersList;

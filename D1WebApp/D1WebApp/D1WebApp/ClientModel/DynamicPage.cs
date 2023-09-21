@@ -24,5 +24,6 @@ namespace D1WebApp.ClientModel
         public string imageurl { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> Sequence { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     }
 }

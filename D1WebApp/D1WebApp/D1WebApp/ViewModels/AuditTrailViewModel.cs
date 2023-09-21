@@ -95,6 +95,7 @@ namespace D1WebApp.BusinessLogicLayer.ViewModels
         public string ImageUrl { get; set; }
         public DateTime CreatedDate { get; set; }
         public int Sequence { get; set; }
+        public bool IsActive { get; set; }
     }
     public class MailTemplateViewModelNew
     {
@@ -106,6 +107,14 @@ namespace D1WebApp.BusinessLogicLayer.ViewModels
         public bool IsActive { get; set; }
         public string MailType { get; set; }
 
+    }
+    
+
+    public class UpdateActiveInActiveViewModel
+    {
+        public string memRefNo { get; set; }
+        public List<string> items { get; set; }
+        public bool isItemActive { get; set; }
     }
 
     public class headerlinkViewModel

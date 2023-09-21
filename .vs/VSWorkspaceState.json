@@ -5,8 +5,9 @@
     "\\D1WebApp\\BuildProcessTemplates",
     "\\D1WebApp\\D1WebApp",
     "\\D1WebApp\\D1WebApp\\D1WebApp",
-    "\\D1WebApp\\D1WebApp\\D1WebApp\\Controllers"
+    "\\D1WebApp\\D1WebApp\\D1WebApp\\Controllers",
+    "\\D1WebApp\\D1WebApp\\D1WebApp\\Repositories"
   ],
-  "SelectedNode": "\\D1WebApp\\D1WebApp\\D1WebApp\\Controllers\\CompanyProfileController.cs",
+  "SelectedNode": "\\D1WebApp\\D1WebApp\\D1WebApp\\Repositories\\CompanyProfileRepository.cs",
   "PreviewInSolutionExplorer": false
 }

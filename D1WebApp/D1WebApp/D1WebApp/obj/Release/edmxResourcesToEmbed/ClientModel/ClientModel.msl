@@ -1773,6 +1773,7 @@
     <EntitySetMapping Name="DynamicPages">
       <EntityTypeMapping TypeName="ClientModel.DynamicPage">
         <MappingFragment StoreEntitySet="DynamicPages">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="Sequence" ColumnName="Sequence" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="imageurl" ColumnName="imageurl" />

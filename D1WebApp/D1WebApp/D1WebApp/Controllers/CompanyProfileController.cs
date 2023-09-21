@@ -111,9 +111,9 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
             return CompanyProfilemanager.Getproductlist(UserMemRefNo, pageno);
         }
         [HttpGet]
-        public dynamic GetFilteredproductlist(string UserMemRefNo, string filterQuery, int pageno)
+        public dynamic GetFilteredproductlist(string UserMemRefNo, string filterQuery,int activeFlag, int pageno)
         {
-            return CompanyProfilemanager.GetFilteredproductlist(UserMemRefNo, filterQuery, pageno);
+            return CompanyProfilemanager.GetFilteredproductlist(UserMemRefNo, filterQuery, activeFlag, pageno);
         }
 
 
@@ -159,6 +159,7 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
                 MailTemplateView.PageContent = httpRequest.Form["PageContent"];
                 MailTemplateView.PageType = httpRequest.Form["PageType"];
                 MailTemplateView.Sequence = Convert.ToInt16(httpRequest.Form["Sequence"]);
+                MailTemplateView.IsActive =Convert.ToBoolean(httpRequest.Form["IsActive"]);
                 foreach (string file in httpRequest.Files)
                 {
                     var postedFile = httpRequest.Files[file];
@@ -244,6 +245,12 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
         {
             return CompanyProfilemanager.UpdateItemPrice(memRefNo,item, price, isItemActive);
         }
+        [HttpPost]
+        public dynamic UpdateBulkActiveInActive(UpdateActiveInActiveViewModel updateActiveInActiveViewModel)
+        {
+            return CompanyProfilemanager.UpdateBulkActiveInActive(updateActiveInActiveViewModel);
+        }
+       
         [HttpGet]
         public dynamic Getsafiltersort(string memRefNo, int configid)
         {
@@ -457,7 +464,11 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
                 ItemDetailsViewModel.DocName = httpRequest.Form["DocName"];
                 ItemDetailsViewModel.Item = httpRequest.Form["Item"];
                 ItemDetailsViewModel.memRefNo = httpRequest.Form["memRefNo"];
-
+                ItemDetailsViewModel.Sequence = Convert.ToInt16(httpRequest.Form["Sequence"]);
+                if(ItemDetailsViewModel.ItemDocId > 0 && (ItemDetailsViewModel.DocType == "doc" || ItemDetailsViewModel.DocType == "image"))
+                {
+                    ItemDetailsViewModel.DocDetailsUrl = httpRequest.Form["DocDetailsUrl"];
+                }
                 if (ItemDetailsViewModel.DocType == "text" || ItemDetailsViewModel.DocType == "video")
                 {
                     ItemDetailsViewModel.DocDetailsUrl = httpRequest.Form["DocDetailsUrl"];

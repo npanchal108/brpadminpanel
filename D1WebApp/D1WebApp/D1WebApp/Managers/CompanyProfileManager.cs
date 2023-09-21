@@ -104,12 +104,10 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.Getproductlist(memRefNo, pageno);
         }
-        public dynamic GetFilteredproductlist(string memRefNo, string filterQuery, int pageno)
+        public dynamic GetFilteredproductlist(string memRefNo, string filterQuery, int activeFlag, int pageno)
         {
-            return CompanyProfilerepository.GetFilteredproductlist(memRefNo, filterQuery, pageno);
+            return CompanyProfilerepository.GetFilteredproductlist(memRefNo, filterQuery, activeFlag, pageno);
         }
-      
-
 
         public dynamic UpdateWebConfigsList(string memRefNo, int configid, string configkey, string configvalue)
         {
@@ -143,7 +141,10 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.UpdateItemPrice(memRefNo, item, price, isItemActive);
         }
-        
+        public dynamic UpdateBulkActiveInActive(UpdateActiveInActiveViewModel updateActiveInActiveViewModel)
+        {
+            return CompanyProfilerepository.UpdateBulkActiveInActive(updateActiveInActiveViewModel);
+        }
         public dynamic GetConfigByID(string memRefNo, int configid)
         {
             return CompanyProfilerepository.GetConfigByID(memRefNo, configid);

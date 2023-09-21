@@ -642,6 +642,7 @@
           <Property Name="imageurl" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="Sequence" Type="bigint" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="EMailTemplates">
           <Key>
@@ -1059,6 +1060,7 @@
           <Property Name="type" Type="varchar" MaxLength="500" />
           <Property Name="name" Type="varchar" MaxLength="500" />
           <Property Name="details_or_url" Type="nvarchar(max)" />
+          <Property Name="sequence" Type="int" />
         </EntityType>
         <EntityType Name="ItemSummery">
           <Key>
@@ -4977,6 +4979,7 @@
           <Property Name="imageurl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="Sequence" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="EMailTemplate">
           <Key>
@@ -6693,6 +6696,7 @@
           <Property Name="type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="details_or_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sequence" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -8472,6 +8476,7 @@
           <EntitySetMapping Name="DynamicPages">
             <EntityTypeMapping TypeName="ClientModel.DynamicPage">
               <MappingFragment StoreEntitySet="DynamicPages">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Sequence" ColumnName="Sequence" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="imageurl" ColumnName="imageurl" />
@@ -10245,6 +10250,7 @@
           <EntitySetMapping Name="itemdetails">
             <EntityTypeMapping TypeName="ClientModel.itemdetail">
               <MappingFragment StoreEntitySet="itemdetails">
+                <ScalarProperty Name="sequence" ColumnName="sequence" />
                 <ScalarProperty Name="details_or_url" ColumnName="details_or_url" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="type" ColumnName="type" />

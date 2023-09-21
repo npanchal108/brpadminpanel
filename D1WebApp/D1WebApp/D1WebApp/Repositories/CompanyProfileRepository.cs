@@ -91,9 +91,14 @@ namespace D1WebApp.DataAccessLayer.Repositories
             try
             {
                 var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                string companyDomain = context.Configs.Where(i => i.ConfigKey == "CompanyDomain").Select(i => i.ConfigValue).FirstOrDefault();
+                //return context.Configs.ToList();
+
+               
                 var orderedDynamicPages = context.DynamicPages
                 .OrderByDescending(page => page.PageID)
                 .ToList();
+
                 return orderedDynamicPages;
             }
             catch (Exception ed)
@@ -129,7 +134,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
             }
 
         }
-        public dynamic GetFilteredproductlist(string memRefNo, string filterQuery, int pageno)
+        public dynamic GetFilteredproductlist(string memRefNo, string filterQuery, int activeFlag, int pageno)
         {
             try
             {
@@ -138,14 +143,32 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 {
                     pageno = 1;
                 }
-                int counts = (context.items.Where(c => c.item1.Contains(filterQuery)).ToList().Count());
-                var GetItemList = (from itm in context.items
-                                   select new ItemListModel
-                                   {
-                                       TotalPage = counts,
-                                       item1 = itm.item1,
-                                       discontinued = itm.discontinued
-                                   }).Where(c=> c.item1.Contains(filterQuery)).OrderByDescending(c => c.item1).Skip((pageno - 1) * 50).Take(50).ToList();
+
+                IQueryable<item> query = (IQueryable<item>)context.items;
+                if (filterQuery != "undefined" && !string.IsNullOrEmpty(filterQuery))
+                {
+                    query = query.Where(c => c.item1.Contains(filterQuery));
+                }
+
+                if (activeFlag != -1)
+                {
+                    bool actFlag = Convert.ToBoolean(activeFlag);
+                    query = query.Where(c => c.discontinued == actFlag);
+                }
+
+                int counts = query.ToList().Count();
+
+                var GetItemList = query
+                    .Select(itm => new ItemListModel
+                    {
+                        TotalPage = counts,
+                        item1 = itm.item1,
+                        discontinued = itm.discontinued
+                    }).OrderByDescending(c => c.item1)
+                    .Skip((pageno - 1) * 50)
+                    .Take(50)
+                    .ToList(); ;
+
                 return GetItemList;
             }
             catch (Exception ed)
@@ -153,9 +176,35 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 ErrorLogs.ErrorLog(0, "GetProductListrepo", DateTime.Now, "GetProductListrepo", ed.ToString(), "GetProductListrepo", 2);
                 return ed.InnerException.ToString();
             }
-
         }
-       
+
+        //public dynamic GetFilteredproductlist(string memRefNo, string filterQuery,int activeFlag, int pageno)
+        //{
+        //    try
+        //    {
+        //        var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+        //        if (pageno == 0)
+        //        {
+        //            pageno = 1;
+        //        }
+        //        int counts = (context.items.Where(c => c.item1.Contains(filterQuery)).ToList().Count());
+        //        var GetItemList = (from itm in context.items
+        //                           select new ItemListModel
+        //                           {
+        //                               TotalPage = counts,
+        //                               item1 = itm.item1,
+        //                               discontinued = itm.discontinued
+        //                           }).Where(c=> c.item1.Contains(filterQuery)).OrderByDescending(c => c.item1).Skip((pageno - 1) * 50).Take(50).ToList();
+        //        return GetItemList;
+        //    }
+        //    catch (Exception ed)
+        //    {
+        //        ErrorLogs.ErrorLog(0, "GetProductListrepo", DateTime.Now, "GetProductListrepo", ed.ToString(), "GetProductListrepo", 2);
+        //        return ed.InnerException.ToString();
+        //    }
+
+        //}
+
         public dynamic GetHeaderlinklist(string memRefNo)
         {
             try
@@ -325,7 +374,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                              DocTypeName = itmdtls.name,
                              DocTypeTextUrl = itmdtls.details_or_url,
                              ItemIsActive = itm.discontinued,
-                             //ItemPrice = waitm.wa_item_list_price
+                             Sequence = itmdtls.sequence
                          }).ToList();
                 return q;
             }
@@ -400,6 +449,29 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 }
             }
             catch (Exception de)
+            {
+                flag = false;
+            }
+            return flag;
+        }
+        public dynamic UpdateBulkActiveInActive(UpdateActiveInActiveViewModel updateActiveInActiveViewModel)
+        {
+            bool flag = false;
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(updateActiveInActiveViewModel.memRefNo));
+                if (updateActiveInActiveViewModel.items != null && updateActiveInActiveViewModel.items.Count > 0)
+                {
+                    var itemdetailsList = context.items.Where(cp => updateActiveInActiveViewModel.items.Contains(cp.item1)).ToList();
+                    if (itemdetailsList != null && itemdetailsList.Count > 0)
+                    {
+                        itemdetailsList.ForEach(a => a.discontinued = updateActiveInActiveViewModel.isItemActive);
+                    }
+                    context.SaveChanges();
+                    flag = true;
+                }
+            }
+            catch (Exception ex)
             {
                 flag = false;
             }
@@ -604,6 +676,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                     getNew.type = ItemDetailsViewModel.DocType;
                     getNew.name = ItemDetailsViewModel.DocName;
                     getNew.details_or_url = ItemDetailsViewModel.DocDetailsUrl;
+                    getNew.sequence = ItemDetailsViewModel.Sequence;
                     context.Entry(getold).CurrentValues.SetValues(getNew);
                     context.SaveChanges();
                     return true;
@@ -616,7 +689,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                     f12.type = ItemDetailsViewModel.DocType;
                     f12.name = ItemDetailsViewModel.DocName;
                     f12.details_or_url = ItemDetailsViewModel.DocDetailsUrl;
-                  
+                    f12.sequence = ItemDetailsViewModel.Sequence;
                     context.itemdetails.Add(f12);
                     context.SaveChanges();
                     return true;
@@ -839,6 +912,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                     getNew.ptype = dynamicpage.PageType;
                     getNew.imageurl = dynamicpage.ImageUrl;
                     getNew.Sequence = dynamicpage.Sequence;
+                    getNew.IsActive = dynamicpage.IsActive;
                     context.Entry(getold).CurrentValues.SetValues(getNew);
                     context.SaveChanges();
                     return true;
@@ -855,6 +929,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                     f12.imageurl = dynamicpage.ImageUrl;
                     f12.CreatedDate = DateTime.Now;
                     f12.Sequence = dynamicpage.Sequence;
+                    f12.IsActive = dynamicpage.IsActive;
                     context.DynamicPages.Add(f12);
                     context.SaveChanges();
                     return true;

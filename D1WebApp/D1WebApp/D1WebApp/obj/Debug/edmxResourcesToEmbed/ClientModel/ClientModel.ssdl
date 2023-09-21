@@ -637,6 +637,7 @@
     <Property Name="imageurl" Type="nvarchar" MaxLength="500" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="Sequence" Type="bigint" />
+    <Property Name="IsActive" Type="bit" />
   </EntityType>
   <EntityType Name="EMailTemplates">
     <Key>
@@ -1054,6 +1055,7 @@
     <Property Name="type" Type="varchar" MaxLength="500" />
     <Property Name="name" Type="varchar" MaxLength="500" />
     <Property Name="details_or_url" Type="nvarchar(max)" />
+    <Property Name="sequence" Type="int" />
   </EntityType>
   <EntityType Name="ItemSummery">
     <Key>

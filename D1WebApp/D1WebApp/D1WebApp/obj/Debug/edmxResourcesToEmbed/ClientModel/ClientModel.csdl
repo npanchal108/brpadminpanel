@@ -2086,6 +2086,7 @@
     <Property Name="imageurl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="Sequence" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
   </EntityType>
   <EntityType Name="EMailTemplate">
     <Key>
@@ -3802,5 +3803,6 @@
     <Property Name="type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="details_or_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sequence" Type="Int32" />
   </EntityType>
 </Schema>
