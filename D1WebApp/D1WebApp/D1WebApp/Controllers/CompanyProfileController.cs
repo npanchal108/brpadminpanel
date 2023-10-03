@@ -160,16 +160,17 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
                 MailTemplateView.PageType = httpRequest.Form["PageType"];
                 MailTemplateView.Sequence = Convert.ToInt16(httpRequest.Form["Sequence"]);
                 MailTemplateView.IsActive =Convert.ToBoolean(httpRequest.Form["IsActive"]);
+                string memRefNo = httpRequest.Form["memRefNo"];
+                MailTemplateView.memRefNo = memRefNo;
+
                 foreach (string file in httpRequest.Files)
                 {
                     var postedFile = httpRequest.Files[file];
                     if (postedFile != null && postedFile.ContentLength > 0)
                     {
-                        string memRefNo = httpRequest.Form["memRefNo"];
-                        MailTemplateView.memRefNo = memRefNo;
-                       string FileName = httpRequest.Form["FileName"];
+                       
+                        string FileName = httpRequest.Form["FileName"];
                         int MaxContentLength = 1024 * 1024 * 5; //Size = 5 MB
-
                         IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".jpeg", ".gif", ".png" };
                         var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
