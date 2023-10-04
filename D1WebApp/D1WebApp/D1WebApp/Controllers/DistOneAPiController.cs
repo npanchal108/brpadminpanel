@@ -28,11 +28,11 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
 #endif
 
 
-    public class DistOneAPiController : ApiController
+    public class EcommerceController : ApiController
     {
         public UserManager usermanager = new UserManager();
         private IApiForVendorPortalRepository ApiForVendorPortalRepository;
-        public DistOneAPiController()
+        public EcommerceController()
         {
             ApiForVendorPortalRepository = new ApiForVendorPortalRepository(new D1WebAppEntities());
         }

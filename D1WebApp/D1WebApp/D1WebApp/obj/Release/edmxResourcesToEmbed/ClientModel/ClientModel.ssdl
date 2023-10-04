@@ -1055,6 +1055,7 @@
     <Property Name="type" Type="varchar" MaxLength="500" />
     <Property Name="name" Type="varchar" MaxLength="500" />
     <Property Name="details_or_url" Type="nvarchar(max)" />
+    <Property Name="sequence" Type="int" />
   </EntityType>
   <EntityType Name="ItemSummery">
     <Key>

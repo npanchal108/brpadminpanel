@@ -29,7 +29,7 @@ namespace D1WebApp.Utilities.Classes
                 HttpClient clients = new HttpClient();
                 var UrlConfig = D1WebApp.Utilities.GeneralConfiguration.GeneralConfiguration.CheckConfiguration("UserApiPath");
                 urls = UrlConfig.ConfigurationValue + CUST_ID_PREFIX + "API";
-                urls = urls + "/DistOneAPi/InsertUpdateConfiguration?CUST_ID_PREFIX=" + CUST_ID_PREFIX + "&ApiEndPoint=" + ApiEndPoint + "&AuthonticationToken=" + AuthonticationToken + "&client=" + client + "&company=" + company + "&username=" + username + "&password=" + password + "&AppPath=" + AppPaths;
+                urls = urls + "/Ecommerce/InsertUpdateConfiguration?CUST_ID_PREFIX=" + CUST_ID_PREFIX + "&ApiEndPoint=" + ApiEndPoint + "&AuthonticationToken=" + AuthonticationToken + "&client=" + client + "&company=" + company + "&username=" + username + "&password=" + password + "&AppPath=" + AppPaths;
                 //clients.BaseAddress = new Uri(urls);
                 HttpResponseMessage response = clients.GetAsync(urls).Result;
                 JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result);
@@ -50,7 +50,7 @@ namespace D1WebApp.Utilities.Classes
                 HttpClient clients = new HttpClient();
                 var UrlConfig = D1WebApp.Utilities.GeneralConfiguration.GeneralConfiguration.CheckConfiguration("UserApiPath");
                 urls = UrlConfig.ConfigurationValue + CUST_ID_PREFIX + "API";
-                urls = urls + "/DistOneAPi/DataMigration";
+                urls = urls + "/Ecommerce/DataMigration";
                 //clients.BaseAddress = new Uri(urls);
                 HttpResponseMessage response = clients.GetAsync(urls).Result;
                 JsonConvert.DeserializeObject(response.Content.ReadAsStringAsync().Result);
@@ -114,7 +114,7 @@ namespace D1WebApp.Utilities.Classes
         {
             try
             {
-                var client = new RestClient(domain + "/" + MemRefNo + "/DistOneAPi/DataSync?day=" + day + "&month=" + month + "&year=" + year);
+                var client = new RestClient(domain + "/" + MemRefNo + "/Ecommerce/DataSync?day=" + day + "&month=" + month + "&year=" + year);
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("Postman-Token", "8498c898-58a0-48b3-907d-bc3617351b19");
                 request.AddHeader("cache-control", "no-cache");

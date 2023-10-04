@@ -162,7 +162,7 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
                 MailTemplateView.IsActive =Convert.ToBoolean(httpRequest.Form["IsActive"]);
                 string memRefNo = httpRequest.Form["memRefNo"];
                 MailTemplateView.memRefNo = memRefNo;
-
+                MailTemplateView.ImageUrl = httpRequest.Form["ImageUrl"];
                 foreach (string file in httpRequest.Files)
                 {
                     var postedFile = httpRequest.Files[file];

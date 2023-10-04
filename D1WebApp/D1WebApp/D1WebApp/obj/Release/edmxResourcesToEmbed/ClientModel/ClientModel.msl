@@ -3547,6 +3547,7 @@
     <EntitySetMapping Name="itemdetails">
       <EntityTypeMapping TypeName="ClientModel.itemdetail">
         <MappingFragment StoreEntitySet="itemdetails">
+          <ScalarProperty Name="sequence" ColumnName="sequence" />
           <ScalarProperty Name="details_or_url" ColumnName="details_or_url" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="type" ColumnName="type" />
