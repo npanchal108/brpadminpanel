@@ -32,5 +32,6 @@ namespace D1WebApp.ClientModel
         public Nullable<bool> taxable_by_state { get; set; }
         public string C__rowids { get; set; }
         public long C__seq { get; set; }
+        public string tax_class { get; set; }
     }
 }

@@ -91,7 +91,15 @@ namespace D1WebApp.DataAccessLayer.Repositories
             try
             {
                 var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
-                return context.DynamicPages.ToList();
+                string companyDomain = context.Configs.Where(i => i.ConfigKey == "CompanyDomain").Select(i => i.ConfigValue).FirstOrDefault();
+                //return context.Configs.ToList();
+
+               
+                var orderedDynamicPages = context.DynamicPages
+                .OrderByDescending(page => page.PageID)
+                .ToList();
+
+                return orderedDynamicPages;
             }
             catch (Exception ed)
             {
@@ -100,6 +108,102 @@ namespace D1WebApp.DataAccessLayer.Repositories
             }
 
         }
+        public dynamic Getproductlist(string memRefNo, int pageno)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                if (pageno == 0)
+                {
+                    pageno = 1;
+                }
+                int counts = (context.items.ToList().Count());
+                var GetItemList = (from itm in context.items
+                                  select new ItemListModel
+                                  {
+                                      TotalPage = counts,
+                                      item1 = itm.item1,
+                                      discontinued = itm.discontinued
+                                  }).OrderByDescending(c => c.item1).Skip((pageno - 1) * 50).Take(50).ToList();
+                return GetItemList;
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "GetProductListrepo", DateTime.Now, "GetProductListrepo", ed.ToString(), "GetProductListrepo", 2);
+                return ed.InnerException.ToString();
+            }
+
+        }
+        public dynamic GetFilteredproductlist(string memRefNo, string filterQuery, int activeFlag, int pageno)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                if (pageno == 0)
+                {
+                    pageno = 1;
+                }
+
+                IQueryable<item> query = (IQueryable<item>)context.items;
+                if (filterQuery != "undefined" && !string.IsNullOrEmpty(filterQuery))
+                {
+                    query = query.Where(c => c.item1.Contains(filterQuery));
+                }
+
+                if (activeFlag != -1)
+                {
+                    bool actFlag = Convert.ToBoolean(activeFlag);
+                    query = query.Where(c => c.discontinued == actFlag);
+                }
+
+                int counts = query.ToList().Count();
+
+                var GetItemList = query
+                    .Select(itm => new ItemListModel
+                    {
+                        TotalPage = counts,
+                        item1 = itm.item1,
+                        discontinued = itm.discontinued
+                    }).OrderByDescending(c => c.item1)
+                    .Skip((pageno - 1) * 50)
+                    .Take(50)
+                    .ToList(); ;
+
+                return GetItemList;
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "GetProductListrepo", DateTime.Now, "GetProductListrepo", ed.ToString(), "GetProductListrepo", 2);
+                return ed.InnerException.ToString();
+            }
+        }
+
+        //public dynamic GetFilteredproductlist(string memRefNo, string filterQuery,int activeFlag, int pageno)
+        //{
+        //    try
+        //    {
+        //        var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+        //        if (pageno == 0)
+        //        {
+        //            pageno = 1;
+        //        }
+        //        int counts = (context.items.Where(c => c.item1.Contains(filterQuery)).ToList().Count());
+        //        var GetItemList = (from itm in context.items
+        //                           select new ItemListModel
+        //                           {
+        //                               TotalPage = counts,
+        //                               item1 = itm.item1,
+        //                               discontinued = itm.discontinued
+        //                           }).Where(c=> c.item1.Contains(filterQuery)).OrderByDescending(c => c.item1).Skip((pageno - 1) * 50).Take(50).ToList();
+        //        return GetItemList;
+        //    }
+        //    catch (Exception ed)
+        //    {
+        //        ErrorLogs.ErrorLog(0, "GetProductListrepo", DateTime.Now, "GetProductListrepo", ed.ToString(), "GetProductListrepo", 2);
+        //        return ed.InnerException.ToString();
+        //    }
+
+        //}
 
         public dynamic GetHeaderlinklist(string memRefNo)
         {
@@ -251,6 +355,127 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 ErrorLogs.ErrorLog(0, "GetdynamicpageByID", DateTime.Now, "GetdynamicpageByID", ed.ToString(), "GetdynamicpageByID", 2);
                 return ed.InnerException.ToString();
             }
+        }
+        public dynamic GetItemDocByID(string memRefNo, string item)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                var q = (from itm in context.items
+                         join itmdtls in context.itemdetails on itm.item1 equals itmdtls.item
+                         //join waitm in context.wa_item on itm.item1 equals waitm.wa_item_item
+                         orderby itmdtls.item
+                         where itmdtls.item == item
+                         select new
+                         {
+                             Id = itmdtls.id,
+                             Item = itmdtls.item,
+                             DocType = itmdtls.type,
+                             DocTypeName = itmdtls.name,
+                             DocTypeTextUrl = itmdtls.details_or_url,
+                             ItemIsActive = itm.discontinued,
+                             Sequence = itmdtls.sequence
+                         }).ToList();
+                return q;
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "GetItemDocByID", DateTime.Now, "GetItemDocByID", ed.ToString(), "GetItemDocByID", 2);
+                return ed.InnerException.ToString();
+            }
+        }
+        public dynamic GetItemPriceByItem(string memRefNo, string item)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                var q = (from itm in context.items
+                         join waitem in context.wa_item on itm.item1 equals waitem.wa_item_item
+                         //orderby waitem.wa_item_item
+                         where itm.item1 == item
+                         select new
+                         {
+                             Item = waitem.wa_item_item,
+                             ItemPrice = (decimal)waitem.wa_item_list_price,
+                             ItemIsActive = itm.discontinued == true ? false : true,
+                         }).FirstOrDefault();
+                return q;
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "GetItemPriceByItem", DateTime.Now, "GetItemPriceByItem", ed.ToString(), "GetItemPriceByItem", 2);
+                return ed.InnerException.ToString();
+            }
+        }
+        
+        public dynamic DeleteItemDocByID(string memRefNo, int itemDocId)
+        {
+            bool flag = false;
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                var getold = context.itemdetails.Where(cp => cp.id == itemDocId).FirstOrDefault();
+                if (getold != null)
+                {
+                    context.itemdetails.Remove(getold);
+                    context.SaveChanges();
+                }
+                flag = true;
+            }
+            catch (Exception de)
+            {
+                flag = false;
+            }
+            return flag;
+        }
+        public dynamic UpdateItemPrice(string memRefNo, string item,decimal price,bool isItemActive) {
+            bool flag = false;
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                if (!string.IsNullOrEmpty(item))
+                {
+                    var itemList = context.wa_item.Where(cp => cp.wa_item_item == item).ToList();
+                    itemList.ForEach(c => c.wa_item_list_price = price);
+                    context.SaveChanges();
+                    flag = true;
+
+                    var itemdetail = context.items.Where(cp => cp.item1 == item).FirstOrDefault();
+                    if (itemdetail != null) {
+                        itemdetail.discontinued = isItemActive == true ? false : true;
+                    }
+                    context.SaveChanges();
+                    flag = true;
+                }
+            }
+            catch (Exception de)
+            {
+                flag = false;
+            }
+            return flag;
+        }
+        public dynamic UpdateBulkActiveInActive(UpdateActiveInActiveViewModel updateActiveInActiveViewModel)
+        {
+            bool flag = false;
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(updateActiveInActiveViewModel.memRefNo));
+                if (updateActiveInActiveViewModel.items != null && updateActiveInActiveViewModel.items.Count > 0)
+                {
+                    var itemdetailsList = context.items.Where(cp => updateActiveInActiveViewModel.items.Contains(cp.item1)).ToList();
+                    if (itemdetailsList != null && itemdetailsList.Count > 0)
+                    {
+                        itemdetailsList.ForEach(a => a.discontinued = updateActiveInActiveViewModel.isItemActive);
+                    }
+                    context.SaveChanges();
+                    flag = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                flag = false;
+            }
+            return flag;
         }
 
         public dynamic UpdateWebConfigsList(string memRefNo, int configid, string configkey, string configvalue)
@@ -438,8 +663,121 @@ namespace D1WebApp.DataAccessLayer.Repositories
 
         }
 
+        public dynamic AddUpdateItemDocument(ItemDetailsViewModel ItemDetailsViewModel)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(ItemDetailsViewModel.memRefNo));
+                if (ItemDetailsViewModel.ItemDocId > 0)
+                {
+                    var getold = context.itemdetails.Where(cp => cp.id == ItemDetailsViewModel.ItemDocId).FirstOrDefault();
+                    var getNew = context.itemdetails.Where(cp => cp.id == ItemDetailsViewModel.ItemDocId).FirstOrDefault();
+                    
+                    getNew.type = ItemDetailsViewModel.DocType;
+                    getNew.name = ItemDetailsViewModel.DocName;
+                    getNew.details_or_url = ItemDetailsViewModel.DocDetailsUrl;
+                    getNew.sequence = ItemDetailsViewModel.Sequence;
+                    context.Entry(getold).CurrentValues.SetValues(getNew);
+                    context.SaveChanges();
+                    return true;
+                }
+                else
+                {
 
+                    itemdetail f12 = new itemdetail();
+                    f12.item = ItemDetailsViewModel.Item;
+                    f12.type = ItemDetailsViewModel.DocType;
+                    f12.name = ItemDetailsViewModel.DocName;
+                    f12.details_or_url = ItemDetailsViewModel.DocDetailsUrl;
+                    f12.sequence = ItemDetailsViewModel.Sequence;
+                    context.itemdetails.Add(f12);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "AddUpdateItemDocument", DateTime.Now, "AddUpdateItemDocument", ed.ToString(), "AddUpdateItemDocument", 2);
+                return ed.InnerException.ToString();
+            }
 
+        }
+        public dynamic UpdateItemPriceBulk(string memRefNo, List<ItemPriceListModel> itemDetailsViewModel)
+        {
+            try 
+            { 
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                if(itemDetailsViewModel.Count > 0)
+                {
+                    foreach (var record in itemDetailsViewModel)
+                    {
+                        var existingItems = context.wa_item.Where(item => item.wa_item_item == record.Item).ToList();
+                        if (existingItems != null && existingItems.Count > 0)
+                        {
+                            foreach (var existingItem in existingItems)
+                            {
+                                existingItem.wa_item_list_price = (decimal?)record.Price;
+                            }
+                        }
+                    }
+                    context.SaveChanges();
+                    return true;
+                }
+                else 
+                {
+                    ErrorLogs.ErrorLog(0, "UpdateItemPriceBulk", DateTime.Now, "UpdateItemPriceBulk","File has no data", "UpdateItemPriceBulk", 2);
+                    return false;
+                }
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "UpdateItemPriceBulk", DateTime.Now, "UpdateItemPriceBulk", ed.ToString(), "UpdateItemPriceBulk", 2);
+                return ed.InnerException.ToString();
+            }
+        }
+        public dynamic UpdateItemDocumentBulk(string memRefNo, List<ItemDetailsViewModel> itemDocumentViewModel)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                if (itemDocumentViewModel.Count > 0)
+                {
+                    foreach (var record in itemDocumentViewModel)
+                    {
+                        var existingItems = context.itemdetails.Where(item => item.item == record.Item && item.type == record.DocType && item.name == record.DocName).ToList();
+                        if (existingItems != null && existingItems.Count > 0)
+                        {
+                            foreach (var existingItem in existingItems)
+                            {
+                                existingItem.details_or_url = record.DocDetailsUrl;
+                            }
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            itemdetail f12 = new itemdetail();
+                            f12.item = record.Item; ;
+                            f12.type= record.DocType; 
+                            f12.name = record.DocName; 
+                            f12.details_or_url = record.DocDetailsUrl;
+                            context.itemdetails.Add(f12);
+                            context.SaveChanges();
+                        }
+                    }
+                    return true;
+                }
+                else
+                {
+                    ErrorLogs.ErrorLog(0, "UpdateItemDocumentBulk", DateTime.Now, "UpdateItemDocumentBulk", "File has no data", "UpdateItemDocumentBulk", 2);
+                    return false;
+                }
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "UpdateItemDocumentBulk", DateTime.Now, "UpdateItemDocumentBulk", ed.ToString(), "UpdateItemDocumentBulk", 2);
+                return ed.InnerException.ToString();
+            }
+        }
         public dynamic UpdateColorConfigsList(string memRefNo, int configid, string configkey, string configvalue, string OldValue)
         {
             try
@@ -571,19 +909,27 @@ namespace D1WebApp.DataAccessLayer.Repositories
                     getNew.PageKeywords = dynamicpage.PageKeywords;
                     getNew.PageName = dynamicpage.PageName;
                     getNew.PageTitle = dynamicpage.PageTitle;
+                    getNew.ptype = dynamicpage.PageType;
+                    getNew.imageurl = dynamicpage.ImageUrl;
+                    getNew.Sequence = dynamicpage.Sequence;
+                    getNew.IsActive = dynamicpage.IsActive;
                     context.Entry(getold).CurrentValues.SetValues(getNew);
                     context.SaveChanges();
                     return true;
                 }
                 else
                 {
-                    
                     DynamicPage f12 = new DynamicPage();
                     f12.PageContent = dynamicpage.PageContent;
                     f12.PageDescription = dynamicpage.PageDescription;
                     f12.PageKeywords = dynamicpage.PageKeywords;
                     f12.PageName = dynamicpage.PageName;
-                    f12.PageTitle = dynamicpage.PageTitle;                    
+                    f12.PageTitle = dynamicpage.PageTitle;
+                    f12.ptype = dynamicpage.PageType;
+                    f12.imageurl = dynamicpage.ImageUrl;
+                    f12.CreatedDate = DateTime.Now;
+                    f12.Sequence = dynamicpage.Sequence;
+                    f12.IsActive = dynamicpage.IsActive;
                     context.DynamicPages.Add(f12);
                     context.SaveChanges();
                     return true;

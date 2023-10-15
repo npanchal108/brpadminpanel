@@ -32,5 +32,6 @@ namespace D1WebApp.ClientModel
         public string Email { get; set; }
         public string cu_userid { get; set; }
         public string profileid { get; set; }
+        public Nullable<bool> iscreditcard { get; set; }
     }
 }

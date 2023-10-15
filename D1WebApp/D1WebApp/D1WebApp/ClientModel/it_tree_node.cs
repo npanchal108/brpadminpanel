@@ -30,5 +30,6 @@ namespace D1WebApp.ClientModel
         public string C__rowids { get; set; }
         public long C__seq { get; set; }
         public string web_id { get; set; }
+        public string meta_descr { get; set; }
     }
 }

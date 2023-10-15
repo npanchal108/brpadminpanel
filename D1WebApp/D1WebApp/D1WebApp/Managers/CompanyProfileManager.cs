@@ -38,6 +38,18 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.AddAndUpdateBanners(ClientBannerView);
         }
+        public dynamic AddUpdateItemDocument(ItemDetailsViewModel ItemDetailsViewModel)
+        {
+            return CompanyProfilerepository.AddUpdateItemDocument(ItemDetailsViewModel);
+        }
+        public dynamic UpdateItemPriceBulk(string memRefNo, List<ItemPriceListModel> itemDetailsViewModel)
+        {
+            return CompanyProfilerepository.UpdateItemPriceBulk(memRefNo,itemDetailsViewModel);
+        }
+        public dynamic UpdateItemDocumentBulk(string memRefNo, List<ItemDetailsViewModel> itemDocuemntViewModel)
+        {
+            return CompanyProfilerepository.UpdateItemDocumentBulk(memRefNo, itemDocuemntViewModel);
+        }
 
         public bool AddConfiguations(string UserMemRefNo, string Key, string keyvalue)
         {
@@ -88,6 +100,15 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.Getdynamicpagelist(memRefNo);
         }
+        public dynamic Getproductlist(string memRefNo, int pageno)
+        {
+            return CompanyProfilerepository.Getproductlist(memRefNo, pageno);
+        }
+        public dynamic GetFilteredproductlist(string memRefNo, string filterQuery, int activeFlag, int pageno)
+        {
+            return CompanyProfilerepository.GetFilteredproductlist(memRefNo, filterQuery, activeFlag, pageno);
+        }
+
         public dynamic UpdateWebConfigsList(string memRefNo, int configid, string configkey, string configvalue)
         {
             return CompanyProfilerepository.UpdateWebConfigsList(memRefNo, configid, configkey, configvalue);
@@ -112,6 +133,18 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.Deletedynamicpage(memRefNo, pageID);
         }
+        public dynamic DeleteItemDocByID(string memRefNo, int itemDocId)
+        {
+            return CompanyProfilerepository.DeleteItemDocByID(memRefNo, itemDocId);
+        }
+        public dynamic UpdateItemPrice(string memRefNo, string item, decimal price, bool isItemActive)
+        {
+            return CompanyProfilerepository.UpdateItemPrice(memRefNo, item, price, isItemActive);
+        }
+        public dynamic UpdateBulkActiveInActive(UpdateActiveInActiveViewModel updateActiveInActiveViewModel)
+        {
+            return CompanyProfilerepository.UpdateBulkActiveInActive(updateActiveInActiveViewModel);
+        }
         public dynamic GetConfigByID(string memRefNo, int configid)
         {
             return CompanyProfilerepository.GetConfigByID(memRefNo, configid);
@@ -132,7 +165,15 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.GetdynamicpageByID(memRefNo, pageid);
         }
-
+        public dynamic GetItemDocByID(string memRefNo, string item)
+        {
+            return CompanyProfilerepository.GetItemDocByID(memRefNo, item);
+        }
+        public dynamic GetItemPriceByItem(string memRefNo, string item)
+        {
+            return CompanyProfilerepository.GetItemPriceByItem(memRefNo, item);
+        }
+        
         //public List<CompanyProfileViewModel> GetAll(string UserMemRefNo)
         //{
         //    return CompanyProfilerepository.GetAll(UserMemRefNo);

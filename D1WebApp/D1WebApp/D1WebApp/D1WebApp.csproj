@@ -16,7 +16,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>D1WebApp</RootNamespace>
     <AssemblyName>D1WebApp</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -308,6 +308,9 @@
       <DependentUpon>ClientModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ClientModel\item.cs">
+      <DependentUpon>ClientModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientModel\itemdetail.cs">
       <DependentUpon>ClientModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ClientModel\ItemSummery.cs">
@@ -658,6 +661,7 @@
     <Compile Include="ViewModels\CompanyProfileViewModel.cs" />
     <Compile Include="ViewModels\EndUserViewModel.cs" />
     <Compile Include="ViewModels\Itemavaibi.cs" />
+    <Compile Include="ViewModels\ItemDetailsViewModel.cs" />
     <Compile Include="ViewModels\MailBoxAPIMasterViewModel.cs" />
     <Compile Include="ViewModels\MailBoxMasterViewModel.cs" />
     <Compile Include="ViewModels\MailBoxViewModel.cs" />
@@ -762,7 +766,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="sql_files\DistOneDB.bacpac" />
     <Content Include="sql_files\VendorPortal.zip" />
     <Content Include="sql_files\D1WebApp.bacpac" />
     <Content Include="sql_files\AdminPortal.zip" />

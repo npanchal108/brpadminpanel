@@ -36,5 +36,7 @@ namespace D1WebApp.ClientModel
         public Nullable<int> qty_transfer_req_in { get; set; }
         public string C__rowids { get; set; }
         public long C__seq { get; set; }
+        public Nullable<decimal> wa_item_qty_bo { get; set; }
+        public Nullable<decimal> wa_item_qty_po { get; set; }
     }
 }

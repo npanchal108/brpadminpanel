@@ -78,9 +78,9 @@ namespace D1WebApp.Utilities
                 sqlBuilder.MultipleActiveResultSets = true;
                 sqlBuilder.IntegratedSecurity = true;
                 sqlBuilder.ApplicationName = appName;
-                if (dataSource.Contains("DESKTOP-51FG8U2") || dataSource.Contains("DESKTOP-7RVH48O") || dataSource.Contains("localhost"))
+                if (dataSource.Contains("DESKTOP-51FG8U2") || dataSource.Contains("LAPTOP-6SR7K8UO") || dataSource.Contains("DESKTOP-7RVH48O") || dataSource.Contains("localhost"))
                 {                    
-                    sqlBuilder.InitialCatalog = "DistOneDB_NEW";
+                    sqlBuilder.InitialCatalog = "ERP_TO_ECOMMERCE";
                 }
                 else
                 {

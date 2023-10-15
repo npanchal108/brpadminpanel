@@ -1105,6 +1105,33 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="removesfromend" FunctionName="ClientModel.Store.removesfromend" />
+    <FunctionImportMapping FunctionImportName="GetActivityLog" FunctionName="ClientModel.Store.GetActivityLog">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ClientModel.GetActivityLog_Result">
+          <ScalarProperty Name="ActivityLogId" ColumnName="ActivityLogId" />
+          <ScalarProperty Name="LogType" ColumnName="LogType" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SearchKeyword" ColumnName="SearchKeyword" />
+          <ScalarProperty Name="CustID" ColumnName="CustID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClientIP" ColumnName="ClientIP" />
+          <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetMenuListForDisplayfornewtheme" FunctionName="ClientModel.Store.GetMenuListForDisplayfornewtheme" />
+    <FunctionImportMapping FunctionImportName="Insert_cu_prcitem_Data" FunctionName="ClientModel.Store.Insert_cu_prcitem_Data" />
+    <FunctionImportMapping FunctionImportName="SearchAllTablesforheader" FunctionName="ClientModel.Store.SearchAllTablesforheader" />
+    <FunctionImportMapping FunctionImportName="usp_GetTerritoryAccount" FunctionName="ClientModel.Store.usp_GetTerritoryAccount">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ClientModel.usp_GetTerritoryAccount_Result">
+          <ScalarProperty Name="customer" ColumnName="customer" />
+          <ScalarProperty Name="territory" ColumnName="territory" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_UpdateCartItems" FunctionName="ClientModel.Store.usp_UpdateCartItems" />
     <EntitySetMapping Name="ActivityLogs">
       <EntityTypeMapping TypeName="ClientModel.ActivityLog">
         <MappingFragment StoreEntitySet="ActivityLog">
@@ -1141,6 +1168,8 @@
     <EntitySetMapping Name="CardDetails">
       <EntityTypeMapping TypeName="ClientModel.CardDetail">
         <MappingFragment StoreEntitySet="CardDetail">
+          <ScalarProperty Name="iscreditcard" ColumnName="iscreditcard" />
+          <ScalarProperty Name="profileid" ColumnName="profileid" />
           <ScalarProperty Name="cu_userid" ColumnName="cu_userid" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="zip" ColumnName="zip" />
@@ -1242,6 +1271,23 @@
           <ScalarProperty Name="contact" ColumnName="contact" />
           <ScalarProperty Name="company_cu" ColumnName="company_cu" />
           <ScalarProperty Name="birthday" ColumnName="birthday" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cu_prcitem">
+      <EntityTypeMapping TypeName="ClientModel.cu_prcitem">
+        <MappingFragment StoreEntitySet="cu_prcitem">
+          <ScalarProperty Name="C__seq" ColumnName="__seq" />
+          <ScalarProperty Name="C__rowids" ColumnName="__rowids" />
+          <ScalarProperty Name="exp_date" ColumnName="exp_date" />
+          <ScalarProperty Name="eff_date" ColumnName="eff_date" />
+          <ScalarProperty Name="price_flag" ColumnName="price_flag" />
+          <ScalarProperty Name="cu_item_desc" ColumnName="cu_item_desc" />
+          <ScalarProperty Name="warehouse" ColumnName="warehouse" />
+          <ScalarProperty Name="cu_item" ColumnName="cu_item" />
+          <ScalarProperty Name="item" ColumnName="item" />
+          <ScalarProperty Name="cu_ref" ColumnName="cu_ref" />
+          <ScalarProperty Name="company_cu" ColumnName="company_cu" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1724,9 +1770,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DynamicPages">
+      <EntityTypeMapping TypeName="ClientModel.DynamicPage">
+        <MappingFragment StoreEntitySet="DynamicPages">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="imageurl" ColumnName="imageurl" />
+          <ScalarProperty Name="ptype" ColumnName="ptype" />
+          <ScalarProperty Name="PageContent" ColumnName="PageContent" />
+          <ScalarProperty Name="PageKeywords" ColumnName="PageKeywords" />
+          <ScalarProperty Name="PageDescription" ColumnName="PageDescription" />
+          <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+          <ScalarProperty Name="PageName" ColumnName="PageName" />
+          <ScalarProperty Name="PageID" ColumnName="PageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="EMailTemplates">
       <EntityTypeMapping TypeName="ClientModel.EMailTemplate">
         <MappingFragment StoreEntitySet="EMailTemplates">
+          <ScalarProperty Name="MailType" ColumnName="MailType" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="MailTemplateContent" ColumnName="MailTemplateContent" />
           <ScalarProperty Name="MailTemplateSubject" ColumnName="MailTemplateSubject" />
@@ -1752,6 +1816,8 @@
     <EntitySetMapping Name="headerlinks">
       <EntityTypeMapping TypeName="ClientModel.headerlink">
         <MappingFragment StoreEntitySet="headerlinks">
+          <ScalarProperty Name="ismenu" ColumnName="ismenu" />
+          <ScalarProperty Name="parent_seq" ColumnName="parent_seq" />
           <ScalarProperty Name="types" ColumnName="types" />
           <ScalarProperty Name="popover" ColumnName="popover" />
           <ScalarProperty Name="seq" ColumnName="seq" />
@@ -1764,6 +1830,8 @@
     <EntitySetMapping Name="it_compl">
       <EntityTypeMapping TypeName="ClientModel.it_compl">
         <MappingFragment StoreEntitySet="it_compl">
+          <ScalarProperty Name="web_descr" ColumnName="web_descr" />
+          <ScalarProperty Name="alpha_sort" ColumnName="alpha_sort" />
           <ScalarProperty Name="C__seq" ColumnName="__seq" />
           <ScalarProperty Name="C__rowids" ColumnName="__rowids" />
           <ScalarProperty Name="use_in_web_grouping" ColumnName="use_in_web_grouping" />
@@ -1799,6 +1867,9 @@
     <EntitySetMapping Name="it_majcls">
       <EntityTypeMapping TypeName="ClientModel.it_majcls">
         <MappingFragment StoreEntitySet="it_majcls">
+          <ScalarProperty Name="title_tag" ColumnName="title_tag" />
+          <ScalarProperty Name="meta" ColumnName="meta" />
+          <ScalarProperty Name="meta_descr" ColumnName="meta_descr" />
           <ScalarProperty Name="C__seq" ColumnName="__seq" />
           <ScalarProperty Name="C__rowids" ColumnName="__rowids" />
           <ScalarProperty Name="web_image" ColumnName="web_image" />
@@ -1816,6 +1887,7 @@
     <EntitySetMapping Name="it_prodline">
       <EntityTypeMapping TypeName="ClientModel.it_prodline">
         <MappingFragment StoreEntitySet="it_prodline">
+          <ScalarProperty Name="meta_descr" ColumnName="meta_descr" />
           <ScalarProperty Name="C__seq" ColumnName="__seq" />
           <ScalarProperty Name="C__rowids" ColumnName="__rowids" />
           <ScalarProperty Name="sa_group_label_15" ColumnName="sa_group_label_15" />
@@ -1904,6 +1976,7 @@
     <EntitySetMapping Name="it_tree_node">
       <EntityTypeMapping TypeName="ClientModel.it_tree_node">
         <MappingFragment StoreEntitySet="it_tree_node">
+          <ScalarProperty Name="meta_descr" ColumnName="meta_descr" />
           <ScalarProperty Name="web_id" ColumnName="web_id" />
           <ScalarProperty Name="C__seq" ColumnName="__seq" />
           <ScalarProperty Name="C__rowids" ColumnName="__rowids" />
@@ -1949,6 +2022,16 @@
     <EntitySetMapping Name="items">
       <EntityTypeMapping TypeName="ClientModel.item">
         <MappingFragment StoreEntitySet="item">
+          <ScalarProperty Name="meta_descr" ColumnName="meta_descr" />
+          <ScalarProperty Name="kc_round_up_in" ColumnName="kc_round_up_in" />
+          <ScalarProperty Name="sq_unit_fact" ColumnName="sq_unit_fact" />
+          <ScalarProperty Name="title_tag" ColumnName="title_tag" />
+          <ScalarProperty Name="meta" ColumnName="meta" />
+          <ScalarProperty Name="free_freight_level" ColumnName="free_freight_level" />
+          <ScalarProperty Name="mechanic_code" ColumnName="mechanic_code" />
+          <ScalarProperty Name="mater_class" ColumnName="mater_class" />
+          <ScalarProperty Name="mater_grade" ColumnName="mater_grade" />
+          <ScalarProperty Name="sc_code" ColumnName="sc_code" />
           <ScalarProperty Name="web_id" ColumnName="web_id" />
           <ScalarProperty Name="C__seq" ColumnName="__seq" />
           <ScalarProperty Name="C__rowids" ColumnName="__rowids" />
@@ -2203,6 +2286,7 @@
     <EntitySetMapping Name="oe_totcodes">
       <EntityTypeMapping TypeName="ClientModel.oe_totcodes">
         <MappingFragment StoreEntitySet="oe_totcodes">
+          <ScalarProperty Name="tax_class" ColumnName="tax_class" />
           <ScalarProperty Name="C__seq" ColumnName="__seq" />
           <ScalarProperty Name="C__rowids" ColumnName="__rowids" />
           <ScalarProperty Name="taxable_by_state" ColumnName="taxable_by_state" />
@@ -2495,6 +2579,7 @@
     <EntitySetMapping Name="PunchoutSessionDetails">
       <EntityTypeMapping TypeName="ClientModel.PunchoutSessionDetail">
         <MappingFragment StoreEntitySet="PunchoutSessionDetail">
+          <ScalarProperty Name="jsonobject" ColumnName="jsonobject" />
           <ScalarProperty Name="ReturnURL" ColumnName="ReturnURL" />
           <ScalarProperty Name="DeliverTo" ColumnName="DeliverTo" />
           <ScalarProperty Name="ShipTo" ColumnName="ShipTo" />
@@ -3338,8 +3423,11 @@
     <EntitySetMapping Name="wa_item">
       <EntityTypeMapping TypeName="ClientModel.wa_item">
         <MappingFragment StoreEntitySet="wa_item">
+          <ScalarProperty Name="wa_item_qty_po" ColumnName="wa_item_qty_po" />
+          <ScalarProperty Name="wa_item_qty_bo" ColumnName="wa_item_qty_bo" />
           <ScalarProperty Name="C__seq" ColumnName="__seq" />
           <ScalarProperty Name="C__rowids" ColumnName="__rowids" />
+          <ScalarProperty Name="qty_transfer_req_in" ColumnName="qty_transfer_req_in" />
           <ScalarProperty Name="avg_lead_time" ColumnName="avg_lead_time" />
           <ScalarProperty Name="item_company_it" ColumnName="item_company_it" />
           <ScalarProperty Name="retail_price" ColumnName="retail_price" />
@@ -3456,19 +3544,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="GetActivityLog" FunctionName="ClientModel.Store.GetActivityLog">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ClientModel.GetActivityLog_Result">
-          <ScalarProperty Name="ActivityLogId" ColumnName="ActivityLogId" />
-          <ScalarProperty Name="LogType" ColumnName="LogType" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="SearchKeyword" ColumnName="SearchKeyword" />
-          <ScalarProperty Name="CustID" ColumnName="CustID" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="ClientIP" ColumnName="ClientIP" />
-          <ScalarProperty Name="LogDate" ColumnName="LogDate" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <EntitySetMapping Name="itemdetails">
+      <EntityTypeMapping TypeName="ClientModel.itemdetail">
+        <MappingFragment StoreEntitySet="itemdetails">
+          <ScalarProperty Name="sequence" ColumnName="sequence" />
+          <ScalarProperty Name="details_or_url" ColumnName="details_or_url" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="item" ColumnName="item" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -24,7 +24,6 @@ namespace D1WebApp.ClientModel
         public ClientEntities(string ClientEntities) : base(ClientEntities)
         {
         }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -108,6 +107,7 @@ namespace D1WebApp.ClientModel
         public virtual DbSet<warehouse> warehouses { get; set; }
         public virtual DbSet<wishlistheader> wishlistheaders { get; set; }
         public virtual DbSet<wishlistproduct> wishlistproducts { get; set; }
+        public virtual DbSet<itemdetail> itemdetails { get; set; }
     
         [DbFunction("ClientEntities", "SplitString")]
         public virtual IQueryable<SplitString_Result> SplitString(string input, string character)
@@ -176,7 +176,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AdvanceSerch", keywordsParameter, keytypeParameter, itemnumbersParameter, productLinesParameter, treenodesParameter, customerParameter, otypeParameter, warehouseParameter, company_cuParameter, company_itParameter, pagenoParameter, pagesizeParameter);
         }
     
-        public virtual ObjectResult<GetBrandListForProductsMenu_Result> GetBrandListForProductsMenu(string warehouse, string customer, string company_it, string company_cu)
+        public virtual ObjectResult<GetBrandListForProductsMenu_Result> GetBrandListForProductsMenu(string warehouse, string customer, string company_it, string company_cu, string usercode)
         {
             var warehouseParameter = warehouse != null ?
                 new ObjectParameter("warehouse", warehouse) :
@@ -194,7 +194,11 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("company_cu", company_cu) :
                 new ObjectParameter("company_cu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBrandListForProductsMenu_Result>("GetBrandListForProductsMenu", warehouseParameter, customerParameter, company_itParameter, company_cuParameter);
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBrandListForProductsMenu_Result>("GetBrandListForProductsMenu", warehouseParameter, customerParameter, company_itParameter, company_cuParameter, usercodeParameter);
         }
     
         public virtual ObjectResult<GetcustomerListbySalesman_Result> GetcustomerListbySalesman(string salesman, string company_cu)
@@ -210,7 +214,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetcustomerListbySalesman_Result>("GetcustomerListbySalesman", salesmanParameter, company_cuParameter);
         }
     
-        public virtual ObjectResult<GetMenuListForDisplay_Result> GetMenuListForDisplay(string warehouse, string treenode, string company_it)
+        public virtual ObjectResult<GetMenuListForDisplay_Result> GetMenuListForDisplay(string warehouse, string treenode, string company_it, string customer, string usercode)
         {
             var warehouseParameter = warehouse != null ?
                 new ObjectParameter("warehouse", warehouse) :
@@ -224,7 +228,15 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("company_it", company_it) :
                 new ObjectParameter("company_it", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMenuListForDisplay_Result>("GetMenuListForDisplay", warehouseParameter, treenodeParameter, company_itParameter);
+            var customerParameter = customer != null ?
+                new ObjectParameter("customer", customer) :
+                new ObjectParameter("customer", typeof(string));
+    
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMenuListForDisplay_Result>("GetMenuListForDisplay", warehouseParameter, treenodeParameter, company_itParameter, customerParameter, usercodeParameter);
         }
     
         public virtual ObjectResult<Gettreenodeforadvancesearch_Result> Gettreenodeforadvancesearch(string company_it)
@@ -577,7 +589,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertTreeNodeImage", treenodeParameter, imgParameter);
         }
     
-        public virtual ObjectResult<SearchAllTables_Result> SearchAllTables(string words, string warehouse, string customer, Nullable<int> stype, Nullable<int> pageno, Nullable<int> pagesize, string company_it, string company_cu)
+        public virtual ObjectResult<SearchAllTables_Result> SearchAllTables(string words, string warehouse, string customer, Nullable<int> stype, Nullable<int> pageno, Nullable<int> pagesize, string company_it, string company_cu, Nullable<bool> hideunavail, string usercode)
         {
             var wordsParameter = words != null ?
                 new ObjectParameter("words", words) :
@@ -611,7 +623,15 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("company_cu", company_cu) :
                 new ObjectParameter("company_cu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchAllTables_Result>("SearchAllTables", wordsParameter, warehouseParameter, customerParameter, stypeParameter, pagenoParameter, pagesizeParameter, company_itParameter, company_cuParameter);
+            var hideunavailParameter = hideunavail.HasValue ?
+                new ObjectParameter("hideunavail", hideunavail) :
+                new ObjectParameter("hideunavail", typeof(bool));
+    
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchAllTables_Result>("SearchAllTables", wordsParameter, warehouseParameter, customerParameter, stypeParameter, pagenoParameter, pagesizeParameter, company_itParameter, company_cuParameter, hideunavailParameter, usercodeParameter);
         }
     
         public virtual ObjectResult<usp_GetCartItems_Result> usp_GetCartItems(string userId, string subuserid, string warehouse, string company_it)
@@ -635,7 +655,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetCartItems_Result>("usp_GetCartItems", userIdParameter, subuseridParameter, warehouseParameter, company_itParameter);
         }
     
-        public virtual ObjectResult<usp_GetBrandList_Result> usp_GetBrandList(string warehouse, string customer, string company_it, string company_cu)
+        public virtual ObjectResult<usp_GetBrandList_Result> usp_GetBrandList(string warehouse, string customer, string company_it, string company_cu, string usercode)
         {
             var warehouseParameter = warehouse != null ?
                 new ObjectParameter("warehouse", warehouse) :
@@ -653,10 +673,14 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("company_cu", company_cu) :
                 new ObjectParameter("company_cu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetBrandList_Result>("usp_GetBrandList", warehouseParameter, customerParameter, company_itParameter, company_cuParameter);
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetBrandList_Result>("usp_GetBrandList", warehouseParameter, customerParameter, company_itParameter, company_cuParameter, usercodeParameter);
         }
     
-        public virtual ObjectResult<usp_GetBrandProductWithItemCount_Result> usp_GetBrandProductWithItemCount(string majClass, string warehouse, string company_it)
+        public virtual ObjectResult<usp_GetBrandProductWithItemCount_Result> usp_GetBrandProductWithItemCount(string majClass, string warehouse, string company_it, string customer, string usercode)
         {
             var majClassParameter = majClass != null ?
                 new ObjectParameter("MajClass", majClass) :
@@ -670,7 +694,15 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("company_it", company_it) :
                 new ObjectParameter("company_it", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetBrandProductWithItemCount_Result>("usp_GetBrandProductWithItemCount", majClassParameter, warehouseParameter, company_itParameter);
+            var customerParameter = customer != null ?
+                new ObjectParameter("customer", customer) :
+                new ObjectParameter("customer", typeof(string));
+    
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetBrandProductWithItemCount_Result>("usp_GetBrandProductWithItemCount", majClassParameter, warehouseParameter, company_itParameter, customerParameter, usercodeParameter);
         }
     
         public virtual int ClearAllTables()
@@ -692,7 +724,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteExtraRows");
         }
     
-        public virtual ObjectResult<GetMenuListForDisplaynew_Result> GetMenuListForDisplaynew(string warehouse, string treenode, string company_it)
+        public virtual ObjectResult<GetMenuListForDisplaynew_Result> GetMenuListForDisplaynew(string warehouse, string treenode, string company_it, string customer, string usercode)
         {
             var warehouseParameter = warehouse != null ?
                 new ObjectParameter("warehouse", warehouse) :
@@ -706,10 +738,18 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("company_it", company_it) :
                 new ObjectParameter("company_it", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMenuListForDisplaynew_Result>("GetMenuListForDisplaynew", warehouseParameter, treenodeParameter, company_itParameter);
+            var customerParameter = customer != null ?
+                new ObjectParameter("customer", customer) :
+                new ObjectParameter("customer", typeof(string));
+    
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMenuListForDisplaynew_Result>("GetMenuListForDisplaynew", warehouseParameter, treenodeParameter, company_itParameter, customerParameter, usercodeParameter);
         }
     
-        public virtual ObjectResult<SP_GetProductListsToDisplay_Result> SP_GetProductListsToDisplay(string menuname, string brandProduct, Nullable<int> pageno, Nullable<int> pagesize, string warehouse, string customer, Nullable<int> stype, string companyit, string companycu, string satagsdetails)
+        public virtual ObjectResult<SP_GetProductListsToDisplay_Result> SP_GetProductListsToDisplay(string menuname, string brandProduct, Nullable<int> pageno, Nullable<int> pagesize, string warehouse, string customer, Nullable<int> stype, string companyit, string companycu, string satagsdetails, Nullable<bool> hideunavail, string usercode)
         {
             var menunameParameter = menuname != null ?
                 new ObjectParameter("Menuname", menuname) :
@@ -751,7 +791,15 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("satagsdetails", satagsdetails) :
                 new ObjectParameter("satagsdetails", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetProductListsToDisplay_Result>("SP_GetProductListsToDisplay", menunameParameter, brandProductParameter, pagenoParameter, pagesizeParameter, warehouseParameter, customerParameter, stypeParameter, companyitParameter, companycuParameter, satagsdetailsParameter);
+            var hideunavailParameter = hideunavail.HasValue ?
+                new ObjectParameter("hideunavail", hideunavail) :
+                new ObjectParameter("hideunavail", typeof(bool));
+    
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetProductListsToDisplay_Result>("SP_GetProductListsToDisplay", menunameParameter, brandProductParameter, pagenoParameter, pagesizeParameter, warehouseParameter, customerParameter, stypeParameter, companyitParameter, companycuParameter, satagsdetailsParameter, hideunavailParameter, usercodeParameter);
         }
     
         public virtual ObjectResult<string> GetSitemapdata()
@@ -759,7 +807,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetSitemapdata");
         }
     
-        public virtual ObjectResult<GetitemdetailsbyName_Result> GetitemdetailsbyName(string itemName, string warehouse, string customer, string company_cu, string company_it)
+        public virtual ObjectResult<GetitemdetailsbyName_Result> GetitemdetailsbyName(string itemName, string warehouse, string customer, string company_cu, string company_it, string usercode)
         {
             var itemNameParameter = itemName != null ?
                 new ObjectParameter("ItemName", itemName) :
@@ -781,7 +829,11 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("company_it", company_it) :
                 new ObjectParameter("company_it", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetitemdetailsbyName_Result>("GetitemdetailsbyName", itemNameParameter, warehouseParameter, customerParameter, company_cuParameter, company_itParameter);
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetitemdetailsbyName_Result>("GetitemdetailsbyName", itemNameParameter, warehouseParameter, customerParameter, company_cuParameter, company_itParameter, usercodeParameter);
         }
     
         public virtual ObjectResult<string> GetItemlistforimageProcess(Nullable<int> pageno, Nullable<int> pagesize)
@@ -962,7 +1014,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Get_sa_Lables_Filter", maj_classParameter, prodlineParameter, treenodeParameter, satagsdetailsParameter, wordsParameter, warehouseParameter, customerParameter, company_itParameter, company_cuParameter);
         }
     
-        public virtual int SP_GetProductListsToDisplayCount(string menuname, string brandProduct, string warehouse, string customer, string companyit, string companycu, string satagsdetails)
+        public virtual int SP_GetProductListsToDisplayCount(string menuname, string brandProduct, string warehouse, string customer, string companyit, string companycu, string satagsdetails, Nullable<bool> hideunavail, string usercode)
         {
             var menunameParameter = menuname != null ?
                 new ObjectParameter("Menuname", menuname) :
@@ -992,7 +1044,15 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("satagsdetails", satagsdetails) :
                 new ObjectParameter("satagsdetails", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GetProductListsToDisplayCount", menunameParameter, brandProductParameter, warehouseParameter, customerParameter, companyitParameter, companycuParameter, satagsdetailsParameter);
+            var hideunavailParameter = hideunavail.HasValue ?
+                new ObjectParameter("hideunavail", hideunavail) :
+                new ObjectParameter("hideunavail", typeof(bool));
+    
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GetProductListsToDisplayCount", menunameParameter, brandProductParameter, warehouseParameter, customerParameter, companyitParameter, companycuParameter, satagsdetailsParameter, hideunavailParameter, usercodeParameter);
         }
     
         public virtual int createatreetable()
@@ -1056,7 +1116,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_ItemSummery__Data", jsondataParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> SearchAllTablesCounts(string words, string warehouse, string customer, string company_it, string company_cu)
+        public virtual ObjectResult<Nullable<int>> SearchAllTablesCounts(string words, string warehouse, string customer, string company_it, string company_cu, Nullable<bool> hideunavail, string usercode)
         {
             var wordsParameter = words != null ?
                 new ObjectParameter("words", words) :
@@ -1078,7 +1138,15 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("company_cu", company_cu) :
                 new ObjectParameter("company_cu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SearchAllTablesCounts", wordsParameter, warehouseParameter, customerParameter, company_itParameter, company_cuParameter);
+            var hideunavailParameter = hideunavail.HasValue ?
+                new ObjectParameter("hideunavail", hideunavail) :
+                new ObjectParameter("hideunavail", typeof(bool));
+    
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SearchAllTablesCounts", wordsParameter, warehouseParameter, customerParameter, company_itParameter, company_cuParameter, hideunavailParameter, usercodeParameter);
         }
     
         public virtual int DeleteCuUserShipMapping(string userid, string shipid, string customer, string company_cu)
@@ -1102,7 +1170,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteCuUserShipMapping", useridParameter, shipidParameter, customerParameter, company_cuParameter);
         }
     
-        public virtual ObjectResult<GetitemdetailsbyNameForXref_Result> GetitemdetailsbyNameForXref(string itemName, string warehouse, string customer, string company_cu, string company_it)
+        public virtual ObjectResult<GetitemdetailsbyNameForXref_Result> GetitemdetailsbyNameForXref(string itemName, string warehouse, string customer, string company_cu, string company_it, string usercode)
         {
             var itemNameParameter = itemName != null ?
                 new ObjectParameter("ItemName", itemName) :
@@ -1124,7 +1192,11 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("company_it", company_it) :
                 new ObjectParameter("company_it", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetitemdetailsbyNameForXref_Result>("GetitemdetailsbyNameForXref", itemNameParameter, warehouseParameter, customerParameter, company_cuParameter, company_itParameter);
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetitemdetailsbyNameForXref_Result>("GetitemdetailsbyNameForXref", itemNameParameter, warehouseParameter, customerParameter, company_cuParameter, company_itParameter, usercodeParameter);
         }
     
         public virtual int InsertCuUserShipMapping(string userid, string shipid, string customer, string company_cu)
@@ -1347,7 +1419,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_cu_prcitem_Data", jsondataParameter);
         }
     
-        public virtual int SearchAllTablesforheader(string words, string warehouse, string customer, Nullable<int> stype, Nullable<int> pageno, Nullable<int> pagesize, string company_it, string company_cu)
+        public virtual int SearchAllTablesforheader(string words, string warehouse, string customer, Nullable<int> stype, Nullable<int> pageno, Nullable<int> pagesize, string company_it, string company_cu, string usercode)
         {
             var wordsParameter = words != null ?
                 new ObjectParameter("words", words) :
@@ -1381,7 +1453,11 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("company_cu", company_cu) :
                 new ObjectParameter("company_cu", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SearchAllTablesforheader", wordsParameter, warehouseParameter, customerParameter, stypeParameter, pagenoParameter, pagesizeParameter, company_itParameter, company_cuParameter);
+            var usercodeParameter = usercode != null ?
+                new ObjectParameter("usercode", usercode) :
+                new ObjectParameter("usercode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SearchAllTablesforheader", wordsParameter, warehouseParameter, customerParameter, stypeParameter, pagenoParameter, pagesizeParameter, company_itParameter, company_cuParameter, usercodeParameter);
         }
     
         public virtual ObjectResult<usp_GetTerritoryAccount_Result> usp_GetTerritoryAccount()
