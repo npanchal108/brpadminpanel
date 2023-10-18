@@ -363,8 +363,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
                 var q = (from itm in context.items
                          join itmdtls in context.itemdetails on itm.item1 equals itmdtls.item
-                         //join waitm in context.wa_item on itm.item1 equals waitm.wa_item_item
-                         orderby itmdtls.item
+                         orderby itmdtls.id descending
                          where itmdtls.item == item
                          select new
                          {
