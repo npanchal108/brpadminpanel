@@ -19,5 +19,6 @@ namespace D1WebApp.Models
         public string SchedulerTime { get; set; }
         public string SchedulerTables { get; set; }
         public Nullable<long> UserId { get; set; }
+        public Nullable<bool> Active { get; set; }
     }
 }

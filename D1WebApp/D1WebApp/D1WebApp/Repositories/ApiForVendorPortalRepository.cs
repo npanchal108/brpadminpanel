@@ -307,6 +307,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 {
                     getoldrecord.SchedulerTime = schedulerConfigVM.SchedulerTime;
                     getoldrecord.SchedulerTables = schedulerConfigVM.SchedulerTables;
+                    getoldrecord.Active = schedulerConfigVM.Active;
                     context.Entry(getoldrecord).State = System.Data.Entity.EntityState.Modified;
                     context.SaveChanges();
                 }

@@ -108,6 +108,7 @@ namespace D1WebApp.ViewModels
         public string SchedulerTime { get; set; }
         public string SchedulerTables { get; set; }
         public long UserId { get; set; }
+        public bool Active { get; set; }
 
         public static SchedulerConfigViewModel ConvertToViewModel(SchedulerConfig schedulerConfig)
         {
@@ -125,6 +126,7 @@ namespace D1WebApp.ViewModels
             schedulerConfig.UserId = schedulerConfigViewModel.UserId;
             schedulerConfig.SchedulerTime = schedulerConfigViewModel.SchedulerTime;
             schedulerConfig.SchedulerTables = schedulerConfigViewModel.SchedulerTables;
+            schedulerConfig.Active = schedulerConfigViewModel.Active;
             return schedulerConfig;
         }
     }
