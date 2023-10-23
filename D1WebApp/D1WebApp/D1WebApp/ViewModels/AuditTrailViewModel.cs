@@ -15,6 +15,7 @@ namespace D1WebApp.BusinessLogicLayer.ViewModels
         public string SchedulerTime { get; set; }
         public string SchedulerTables { get; set; }
         public long? UserId { get; set; }
+        public bool? Active { get; set; }
 
     }
 

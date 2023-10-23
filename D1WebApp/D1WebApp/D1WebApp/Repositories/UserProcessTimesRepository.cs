@@ -65,7 +65,8 @@ namespace D1WebApp.Repositories
                                         UserId=sch.UserId,
                                         SchedulerName=sch.SchedulerName,
                                         SchedulerTables=sch.SchedulerTables,
-                                        SchedulerTime=sch.SchedulerTime
+                                        SchedulerTime=sch.SchedulerTime,
+                                        Active = sch.Active
                                     }).ToList();
             return UserProcessTimesView;
 

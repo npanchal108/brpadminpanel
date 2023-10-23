@@ -83,6 +83,7 @@
           <Property Name="SchedulerTime" Type="varchar" MaxLength="500" />
           <Property Name="SchedulerTables" Type="varchar(max)" />
           <Property Name="UserId" Type="bigint" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="MailBoxes">
           <Key>
@@ -789,6 +790,7 @@
           <Property Name="SchedulerTime" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="SchedulerTables" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="Int64" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="MailBox">
           <Key>
@@ -1336,6 +1338,7 @@
           <EntitySetMapping Name="SchedulerConfigs">
             <EntityTypeMapping TypeName="D1WebAppModel.SchedulerConfig">
               <MappingFragment StoreEntitySet="SchedulerConfig">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="SchedulerTables" ColumnName="SchedulerTables" />
                 <ScalarProperty Name="SchedulerTime" ColumnName="SchedulerTime" />

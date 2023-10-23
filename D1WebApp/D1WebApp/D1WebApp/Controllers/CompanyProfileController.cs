@@ -459,7 +459,7 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
                 string getid = httpRequest.Form["ItemDocId"];
                 if (!string.IsNullOrEmpty(getid) && !getid.Equals("null"))
                 {
-                    ItemDetailsViewModel.ItemDocId = Convert.ToInt16(getid);
+                    ItemDetailsViewModel.ItemDocId = Convert.ToInt32(getid);
                 }
                 ItemDetailsViewModel.DocType = httpRequest.Form["DocType"];
                 ItemDetailsViewModel.DocName = httpRequest.Form["DocName"];

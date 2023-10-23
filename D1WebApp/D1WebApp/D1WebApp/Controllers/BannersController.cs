@@ -96,7 +96,7 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
                             UIpath = UIpath + "\\Content\\banners\\" + FileName.Replace(" ","");
 
                             var getpath = D1WebApp.Utilities.GeneralConfiguration.GeneralConfiguration.CheckConfiguration("domainpath");
-                            string getimagepath = getpath.ConfigurationValue+"/" + memRefNo + "Api" + "/Content/banners/" + FileName+"?v="+DateTime.Now.ToShortDateString();
+                            string getimagepath = getpath.ConfigurationValue+"/" + memRefNo + "Api" + "/Content/banners/" + FileName.Replace(" ", "") + "?v="+DateTime.Now.ToShortDateString();
                             //  where you want to attach your imageurl
                             //if needed write the code to update the table
                             // var filePath = HttpContext.Current.Server.MapPath(UIpath);
