@@ -1466,6 +1466,7 @@
     <EntitySetMapping Name="cu_user">
       <EntityTypeMapping TypeName="ClientModel.cu_user">
         <MappingFragment StoreEntitySet="cu_user">
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
           <ScalarProperty Name="profile_log" ColumnName="profile_log" />
           <ScalarProperty Name="cell" ColumnName="cell" />
           <ScalarProperty Name="phone_ext" ColumnName="phone_ext" />
@@ -2680,6 +2681,8 @@
     <EntitySetMapping Name="shipvia_mapping">
       <EntityTypeMapping TypeName="ClientModel.shipvia_mapping">
         <MappingFragment StoreEntitySet="shipvia_mapping">
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="Markup" ColumnName="Markup" />
           <ScalarProperty Name="providercode" ColumnName="providercode" />
           <ScalarProperty Name="provider" ColumnName="provider" />
           <ScalarProperty Name="name" ColumnName="name" />
@@ -3547,6 +3550,7 @@
     <EntitySetMapping Name="itemdetails">
       <EntityTypeMapping TypeName="ClientModel.itemdetail">
         <MappingFragment StoreEntitySet="itemdetails">
+          <ScalarProperty Name="IMType" ColumnName="IMType" />
           <ScalarProperty Name="sequence" ColumnName="sequence" />
           <ScalarProperty Name="details_or_url" ColumnName="details_or_url" />
           <ScalarProperty Name="name" ColumnName="name" />

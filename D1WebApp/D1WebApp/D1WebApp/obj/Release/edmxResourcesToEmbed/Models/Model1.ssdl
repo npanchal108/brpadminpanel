@@ -78,6 +78,7 @@
     <Property Name="SchedulerTime" Type="varchar" MaxLength="500" />
     <Property Name="SchedulerTables" Type="varchar(max)" />
     <Property Name="UserId" Type="bigint" />
+    <Property Name="Active" Type="bit" />
   </EntityType>
   <EntityType Name="MailBoxes">
     <Key>

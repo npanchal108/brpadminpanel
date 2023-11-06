@@ -21,6 +21,7 @@
       <Parameter Name="company_it" Mode="In" Type="String" />
       <Parameter Name="pageno" Mode="In" Type="Int32" />
       <Parameter Name="pagesize" Mode="In" Type="Int32" />
+      <Parameter Name="satagsdetails" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetBrandListForProductsMenu" ReturnType="Collection(ClientModel.GetBrandListForProductsMenu_Result)">
       <Parameter Name="warehouse" Mode="In" Type="String" />
@@ -167,6 +168,7 @@
       <Parameter Name="company_cu" Mode="In" Type="String" />
       <Parameter Name="hideunavail" Mode="In" Type="Boolean" />
       <Parameter Name="usercode" Mode="In" Type="String" />
+      <Parameter Name="satagsdetails" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="usp_GetCartItems" ReturnType="Collection(ClientModel.usp_GetCartItems_Result)">
       <Parameter Name="userId" Mode="In" Type="String" />
@@ -312,6 +314,7 @@
       <Parameter Name="company_cu" Mode="In" Type="String" />
       <Parameter Name="hideunavail" Mode="In" Type="Boolean" />
       <Parameter Name="usercode" Mode="In" Type="String" />
+      <Parameter Name="satagsdetails" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="DeleteCuUserShipMapping">
       <Parameter Name="userid" Mode="In" Type="String" />
@@ -353,6 +356,7 @@
       <Parameter Name="warehouse" Mode="In" Type="String" />
       <Parameter Name="company_cu" Mode="In" Type="String" />
       <Parameter Name="company_it" Mode="In" Type="String" />
+      <Parameter Name="satagsdetails" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="createvalidateurlfile" ReturnType="Collection(String)" />
     <FunctionImport Name="GetChildItems">
@@ -1798,6 +1802,7 @@
     <Property Name="phone_ext" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
     <Property Name="cell" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
     <Property Name="profile_log" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="timestamp" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="customer">
     <Key>
@@ -2961,6 +2966,8 @@
     <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="provider" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="providercode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Markup" Type="Int32" />
+    <Property Name="type" Type="Int32" />
   </EntityType>
   <EntityType Name="SouthernPunchOutSession">
     <Key>
@@ -3804,5 +3811,6 @@
     <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="details_or_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="sequence" Type="Int32" />
+    <Property Name="IMType" Type="Boolean" />
   </EntityType>
 </Schema>

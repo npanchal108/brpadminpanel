@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using D1WebApp.DataAccessLayer.Repositories;
 using D1WebApp.BusinessLogicLayer.ViewModels;
 using D1WebApp.ClientModel;
+using System.Web.UI;
 
 namespace D1WebApp.Utilities
 {
@@ -46,9 +47,9 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.UpdateItemPriceBulk(memRefNo,itemDetailsViewModel);
         }
-        public dynamic UpdateItemDocumentBulk(string memRefNo, List<ItemDetailsViewModel> itemDocuemntViewModel)
+        public dynamic UpdateItemDocumentBulk(string memRefNo, List<ItemDetailsViewModel> itemDocuemntViewModel,bool IMType)
         {
-            return CompanyProfilerepository.UpdateItemDocumentBulk(memRefNo, itemDocuemntViewModel);
+            return CompanyProfilerepository.UpdateItemDocumentBulk(memRefNo, itemDocuemntViewModel, IMType);
         }
 
         public bool AddConfiguations(string UserMemRefNo, string Key, string keyvalue)
@@ -169,6 +170,15 @@ namespace D1WebApp.Utilities
         {
             return CompanyProfilerepository.GetItemDocByID(memRefNo, item);
         }
+        public dynamic GetManufracturerItemDocList(string memRefNo, int pageno)
+        {
+            return CompanyProfilerepository.GetManufracturerItemDocList(memRefNo , pageno);
+        }
+        public dynamic GetFilteredManufracturerItemDocList(string memRefNo, string filterQuery, int pageno)
+        {
+            return CompanyProfilerepository.GetFilteredManufracturerItemDocList(memRefNo, filterQuery, pageno);
+        }
+        
         public dynamic GetItemPriceByItem(string memRefNo, string item)
         {
             return CompanyProfilerepository.GetItemPriceByItem(memRefNo, item);

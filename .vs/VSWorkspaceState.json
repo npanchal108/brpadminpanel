@@ -2,12 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\D1WebApp",
-    "\\D1WebApp\\BuildProcessTemplates",
     "\\D1WebApp\\D1WebApp",
     "\\D1WebApp\\D1WebApp\\D1WebApp",
+    "\\D1WebApp\\D1WebApp\\D1WebApp\\ClientModel",
     "\\D1WebApp\\D1WebApp\\D1WebApp\\Controllers",
-    "\\D1WebApp\\D1WebApp\\D1WebApp\\Repositories"
+    "\\D1WebApp\\D1WebApp\\D1WebApp\\Managers",
+    "\\D1WebApp\\D1WebApp\\D1WebApp\\Models",
+    "\\D1WebApp\\D1WebApp\\D1WebApp\\Repositories",
+    "\\D1WebApp\\D1WebApp\\D1WebApp\\ViewModels"
   ],
-  "SelectedNode": "\\D1WebApp\\D1WebApp\\D1WebApp\\Repositories\\CompanyProfileRepository.cs",
   "PreviewInSolutionExplorer": false
 }

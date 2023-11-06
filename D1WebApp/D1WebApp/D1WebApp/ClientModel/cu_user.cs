@@ -40,5 +40,6 @@ namespace D1WebApp.ClientModel
         public string phone_ext { get; set; }
         public string cell { get; set; }
         public string profile_log { get; set; }
+        public Nullable<System.DateTime> timestamp { get; set; }
     }
 }

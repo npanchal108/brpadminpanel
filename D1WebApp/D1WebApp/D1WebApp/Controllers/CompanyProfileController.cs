@@ -115,7 +115,17 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
         {
             return CompanyProfilemanager.GetFilteredproductlist(UserMemRefNo, filterQuery, activeFlag, pageno);
         }
+        [HttpGet]
+        public dynamic GetManufracturerItemDocList(string memRefNo,  int pageno)
+        {
+            return CompanyProfilemanager.GetManufracturerItemDocList(memRefNo, pageno);
+        }
 
+        [HttpGet]
+        public dynamic GetFilteredManufracturerItemDocList(string memRefNo, string filterQuery, int pageno)
+        {
+            return CompanyProfilemanager.GetFilteredManufracturerItemDocList(memRefNo, filterQuery,pageno);
+        }
 
         [HttpGet]
         public dynamic UpdateWebConfigs(string memRefNo, int configid, string configkey, string configvalue)
@@ -283,6 +293,7 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
         {
             return CompanyProfilemanager.GetItemDocByID(memRefNo, item);
         }
+     
         [HttpGet]
         public dynamic GetItemPriceByItem(string memRefNo, string item)
         {
@@ -378,7 +389,8 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
                 List<ItemDetailsViewModel> documentList = new List<ItemDetailsViewModel>();
 
                 var memRefNo = httpRequest.Form["memRefNo"];
-
+                var IMType = Convert.ToBoolean(httpRequest.Form["IMType"]);
+                
                 foreach (string file in httpRequest.Files)
                 {
                     var postedFile = httpRequest.Files[file];
@@ -401,7 +413,7 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
                         }
                     }
                 }
-                return CompanyProfilemanager.UpdateItemDocumentBulk(memRefNo, documentList);
+                return CompanyProfilemanager.UpdateItemDocumentBulk(memRefNo, documentList, IMType);
             }
             catch (Exception ex)
             {
@@ -466,7 +478,8 @@ namespace D1WebApp.BussinessLogicLayer.Controllers
                 ItemDetailsViewModel.Item = httpRequest.Form["Item"];
                 ItemDetailsViewModel.memRefNo = httpRequest.Form["memRefNo"];
                 ItemDetailsViewModel.Sequence = Convert.ToInt16(httpRequest.Form["Sequence"]);
-                if(ItemDetailsViewModel.ItemDocId > 0 && (ItemDetailsViewModel.DocType == "doc" || ItemDetailsViewModel.DocType == "image"))
+                ItemDetailsViewModel.IMType = Convert.ToBoolean(httpRequest.Form["IMType"]);
+                if (ItemDetailsViewModel.ItemDocId > 0 && (ItemDetailsViewModel.DocType == "doc" || ItemDetailsViewModel.DocType == "image"))
                 {
                     ItemDetailsViewModel.DocDetailsUrl = httpRequest.Form["DocDetailsUrl"];
                 }

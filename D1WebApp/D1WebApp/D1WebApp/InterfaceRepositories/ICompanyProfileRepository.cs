@@ -28,7 +28,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
         dynamic AddAndUpdateBanners(ClientBannerViewModel ClientBannerView);
         dynamic AddUpdateItemDocument(ItemDetailsViewModel ItemDetailsViewModel);
         dynamic UpdateItemPriceBulk(string memRefNo, List<ItemPriceListModel> itemDetailsViewModel);
-        dynamic UpdateItemDocumentBulk(string memRefNo, List<ItemDetailsViewModel> itemDocumentViewModel);
+        dynamic UpdateItemDocumentBulk(string memRefNo, List<ItemDetailsViewModel> itemDocumentViewModel, bool IMType);
         dynamic GetMailTemplateList(string memRefNo);
         dynamic GetMailTemplateByID(string memRefNo, int MailTemplateID);
         dynamic UpdateMailTemplate(MailTemplateViewModelNew MailTemplateView);

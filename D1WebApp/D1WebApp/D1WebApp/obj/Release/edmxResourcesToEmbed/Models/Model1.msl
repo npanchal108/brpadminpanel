@@ -80,6 +80,7 @@
     <EntitySetMapping Name="SchedulerConfigs">
       <EntityTypeMapping TypeName="D1WebAppModel.SchedulerConfig">
         <MappingFragment StoreEntitySet="SchedulerConfig">
+          <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="SchedulerTables" ColumnName="SchedulerTables" />
           <ScalarProperty Name="SchedulerTime" ColumnName="SchedulerTime" />

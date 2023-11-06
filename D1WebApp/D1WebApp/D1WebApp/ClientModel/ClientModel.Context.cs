@@ -123,7 +123,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<SplitString_Result>("[ClientEntities].[SplitString](@Input, @Character)", inputParameter, characterParameter);
         }
     
-        public virtual int AdvanceSerch(string keywords, Nullable<int> keytype, string itemnumbers, string productLines, string treenodes, string customer, Nullable<int> otype, string warehouse, string company_cu, string company_it, Nullable<int> pageno, Nullable<int> pagesize)
+        public virtual int AdvanceSerch(string keywords, Nullable<int> keytype, string itemnumbers, string productLines, string treenodes, string customer, Nullable<int> otype, string warehouse, string company_cu, string company_it, Nullable<int> pageno, Nullable<int> pagesize, string satagsdetails)
         {
             var keywordsParameter = keywords != null ?
                 new ObjectParameter("keywords", keywords) :
@@ -173,7 +173,11 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("pagesize", pagesize) :
                 new ObjectParameter("pagesize", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AdvanceSerch", keywordsParameter, keytypeParameter, itemnumbersParameter, productLinesParameter, treenodesParameter, customerParameter, otypeParameter, warehouseParameter, company_cuParameter, company_itParameter, pagenoParameter, pagesizeParameter);
+            var satagsdetailsParameter = satagsdetails != null ?
+                new ObjectParameter("satagsdetails", satagsdetails) :
+                new ObjectParameter("satagsdetails", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AdvanceSerch", keywordsParameter, keytypeParameter, itemnumbersParameter, productLinesParameter, treenodesParameter, customerParameter, otypeParameter, warehouseParameter, company_cuParameter, company_itParameter, pagenoParameter, pagesizeParameter, satagsdetailsParameter);
         }
     
         public virtual ObjectResult<GetBrandListForProductsMenu_Result> GetBrandListForProductsMenu(string warehouse, string customer, string company_it, string company_cu, string usercode)
@@ -589,7 +593,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertTreeNodeImage", treenodeParameter, imgParameter);
         }
     
-        public virtual ObjectResult<SearchAllTables_Result> SearchAllTables(string words, string warehouse, string customer, Nullable<int> stype, Nullable<int> pageno, Nullable<int> pagesize, string company_it, string company_cu, Nullable<bool> hideunavail, string usercode)
+        public virtual ObjectResult<SearchAllTables_Result> SearchAllTables(string words, string warehouse, string customer, Nullable<int> stype, Nullable<int> pageno, Nullable<int> pagesize, string company_it, string company_cu, Nullable<bool> hideunavail, string usercode, string satagsdetails)
         {
             var wordsParameter = words != null ?
                 new ObjectParameter("words", words) :
@@ -631,7 +635,11 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("usercode", usercode) :
                 new ObjectParameter("usercode", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchAllTables_Result>("SearchAllTables", wordsParameter, warehouseParameter, customerParameter, stypeParameter, pagenoParameter, pagesizeParameter, company_itParameter, company_cuParameter, hideunavailParameter, usercodeParameter);
+            var satagsdetailsParameter = satagsdetails != null ?
+                new ObjectParameter("satagsdetails", satagsdetails) :
+                new ObjectParameter("satagsdetails", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchAllTables_Result>("SearchAllTables", wordsParameter, warehouseParameter, customerParameter, stypeParameter, pagenoParameter, pagesizeParameter, company_itParameter, company_cuParameter, hideunavailParameter, usercodeParameter, satagsdetailsParameter);
         }
     
         public virtual ObjectResult<usp_GetCartItems_Result> usp_GetCartItems(string userId, string subuserid, string warehouse, string company_it)
@@ -1116,7 +1124,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_ItemSummery__Data", jsondataParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> SearchAllTablesCounts(string words, string warehouse, string customer, string company_it, string company_cu, Nullable<bool> hideunavail, string usercode)
+        public virtual ObjectResult<Nullable<int>> SearchAllTablesCounts(string words, string warehouse, string customer, string company_it, string company_cu, Nullable<bool> hideunavail, string usercode, string satagsdetails)
         {
             var wordsParameter = words != null ?
                 new ObjectParameter("words", words) :
@@ -1146,7 +1154,11 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("usercode", usercode) :
                 new ObjectParameter("usercode", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SearchAllTablesCounts", wordsParameter, warehouseParameter, customerParameter, company_itParameter, company_cuParameter, hideunavailParameter, usercodeParameter);
+            var satagsdetailsParameter = satagsdetails != null ?
+                new ObjectParameter("satagsdetails", satagsdetails) :
+                new ObjectParameter("satagsdetails", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SearchAllTablesCounts", wordsParameter, warehouseParameter, customerParameter, company_itParameter, company_cuParameter, hideunavailParameter, usercodeParameter, satagsdetailsParameter);
         }
     
         public virtual int DeleteCuUserShipMapping(string userid, string shipid, string customer, string company_cu)
@@ -1258,7 +1270,7 @@ namespace D1WebApp.ClientModel
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetHelpDeskFilterData_Result>("usp_GetHelpDeskFilterData");
         }
     
-        public virtual int AdvanceSerchcount(string keywords, Nullable<int> keytype, string itemnumbers, string productLines, string treenodes, string customer, string warehouse, string company_cu, string company_it)
+        public virtual int AdvanceSerchcount(string keywords, Nullable<int> keytype, string itemnumbers, string productLines, string treenodes, string customer, string warehouse, string company_cu, string company_it, string satagsdetails)
         {
             var keywordsParameter = keywords != null ?
                 new ObjectParameter("keywords", keywords) :
@@ -1296,7 +1308,11 @@ namespace D1WebApp.ClientModel
                 new ObjectParameter("company_it", company_it) :
                 new ObjectParameter("company_it", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AdvanceSerchcount", keywordsParameter, keytypeParameter, itemnumbersParameter, productLinesParameter, treenodesParameter, customerParameter, warehouseParameter, company_cuParameter, company_itParameter);
+            var satagsdetailsParameter = satagsdetails != null ?
+                new ObjectParameter("satagsdetails", satagsdetails) :
+                new ObjectParameter("satagsdetails", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AdvanceSerchcount", keywordsParameter, keytypeParameter, itemnumbersParameter, productLinesParameter, treenodesParameter, customerParameter, warehouseParameter, company_cuParameter, company_itParameter, satagsdetailsParameter);
         }
     
         public virtual ObjectResult<string> createvalidateurlfile()

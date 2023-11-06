@@ -18,6 +18,7 @@ using D1WebApp.Models;
 using System.Data.SqlClient;
 using System.Data;
 using System.IO;
+using System.Web.UI;
 
 namespace D1WebApp.DataAccessLayer.Repositories
 {
@@ -178,32 +179,82 @@ namespace D1WebApp.DataAccessLayer.Repositories
             }
         }
 
-        //public dynamic GetFilteredproductlist(string memRefNo, string filterQuery,int activeFlag, int pageno)
-        //{
-        //    try
-        //    {
-        //        var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
-        //        if (pageno == 0)
-        //        {
-        //            pageno = 1;
-        //        }
-        //        int counts = (context.items.Where(c => c.item1.Contains(filterQuery)).ToList().Count());
-        //        var GetItemList = (from itm in context.items
-        //                           select new ItemListModel
-        //                           {
-        //                               TotalPage = counts,
-        //                               item1 = itm.item1,
-        //                               discontinued = itm.discontinued
-        //                           }).Where(c=> c.item1.Contains(filterQuery)).OrderByDescending(c => c.item1).Skip((pageno - 1) * 50).Take(50).ToList();
-        //        return GetItemList;
-        //    }
-        //    catch (Exception ed)
-        //    {
-        //        ErrorLogs.ErrorLog(0, "GetProductListrepo", DateTime.Now, "GetProductListrepo", ed.ToString(), "GetProductListrepo", 2);
-        //        return ed.InnerException.ToString();
-        //    }
+        public dynamic GetManufracturerItemDocList(string memRefNo, int pageno)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+                if (pageno == 0)
+                {
+                    pageno = 1;
+                }
+                int counts = (context.itemdetails.Where(p => p.IMType == true).ToList().Count());
+                var GetItemList = (from itm in context.itemdetails
+                                   select new ItemDetailsViewModel
+                                   {
+                                       TotalPage = counts,
+                                       ItemDocId = itm.id,
+                                       Item = itm.item,
+                                       DocType = itm.type,
+                                       DocName = itm.name,
+                                       DocDetailsUrl = itm.details_or_url,
+                                       Sequence = itm.sequence,
+                                       IMType = itm.IMType
+                                   }).Where(p => p.IMType == true).OrderByDescending(c => c.ItemDocId).Skip((pageno - 1) * 50).Take(50).ToList();
+                return GetItemList;
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "GetManufracturerItemDocList", DateTime.Now, "GetManufracturerItemDocList", ed.ToString(), "GetManufracturerItemDocList", 2);
+                return ed.InnerException.ToString();
+            }
 
-        //}
+        }
+
+        public dynamic GetFilteredManufracturerItemDocList(string memRefNo, string filterQuery, int pageno)
+        {
+            try
+            {
+                var context = new ClientEntities(ErrorLogs.BuildConnectionString(memRefNo));
+
+                if (pageno == 0)
+                {
+                    pageno = 1;
+                }
+
+                IQueryable<itemdetail> query = (IQueryable<itemdetail>)context.itemdetails.Where(c => c.IMType == true);
+
+                if (filterQuery != "undefined" && !string.IsNullOrEmpty(filterQuery))
+                {
+                    query = query.Where(c => c.item.Contains(filterQuery));
+                }
+
+                int counts = query.ToList().Count();
+
+                var GetItemList = query
+                    .Select(itm => new ItemDetailsViewModel
+                    {
+                        TotalPage = counts,
+                        ItemDocId = itm.id,
+                        Item= itm.item,
+                        DocType = itm.type,
+                        DocName = itm.name,
+                        DocDetailsUrl = itm.details_or_url,
+                        Sequence = itm.sequence,
+
+                    }).Where(p => p.IMType == true).OrderByDescending(c => c.ItemDocId)
+                    .Skip((pageno - 1) * 50)
+                    .Take(50)
+                    .ToList(); ;
+
+                return GetItemList;
+            }
+            catch (Exception ed)
+            {
+                ErrorLogs.ErrorLog(0, "GetFilteredManufracturerItemDocList", DateTime.Now, "GetFilteredManufracturerItemDocList", ed.ToString(), "GetFilteredManufracturerItemDocList", 2);
+                return ed.InnerException.ToString();
+            }
+        }
 
         public dynamic GetHeaderlinklist(string memRefNo)
         {
@@ -356,6 +407,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 return ed.InnerException.ToString();
             }
         }
+           
         public dynamic GetItemDocByID(string memRefNo, string item)
         {
             try
@@ -373,7 +425,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                              DocTypeName = itmdtls.name,
                              DocTypeTextUrl = itmdtls.details_or_url,
                              ItemIsActive = itm.discontinued,
-                             Sequence = itmdtls.sequence
+                             Sequence = itmdtls.sequence,
                          }).ToList();
                 return q;
             }
@@ -671,11 +723,13 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 {
                     var getold = context.itemdetails.Where(cp => cp.id == ItemDetailsViewModel.ItemDocId).FirstOrDefault();
                     var getNew = context.itemdetails.Where(cp => cp.id == ItemDetailsViewModel.ItemDocId).FirstOrDefault();
-                    
+
+                    getNew.item = ItemDetailsViewModel.Item;
                     getNew.type = ItemDetailsViewModel.DocType;
                     getNew.name = ItemDetailsViewModel.DocName;
                     getNew.details_or_url = ItemDetailsViewModel.DocDetailsUrl;
                     getNew.sequence = ItemDetailsViewModel.Sequence;
+                    getNew.IMType = ItemDetailsViewModel.IMType;
                     context.Entry(getold).CurrentValues.SetValues(getNew);
                     context.SaveChanges();
                     return true;
@@ -689,6 +743,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                     f12.name = ItemDetailsViewModel.DocName;
                     f12.details_or_url = ItemDetailsViewModel.DocDetailsUrl;
                     f12.sequence = ItemDetailsViewModel.Sequence;
+                    f12.IMType = ItemDetailsViewModel.IMType;
                     context.itemdetails.Add(f12);
                     context.SaveChanges();
                     return true;
@@ -734,7 +789,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 return ed.InnerException.ToString();
             }
         }
-        public dynamic UpdateItemDocumentBulk(string memRefNo, List<ItemDetailsViewModel> itemDocumentViewModel)
+        public dynamic UpdateItemDocumentBulk(string memRefNo, List<ItemDetailsViewModel> itemDocumentViewModel,bool IMType)
         {
             try
             {
@@ -743,7 +798,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                 {
                     foreach (var record in itemDocumentViewModel)
                     {
-                        var existingItems = context.itemdetails.Where(item => item.item == record.Item && item.type == record.DocType && item.name == record.DocName).ToList();
+                        var existingItems = context.itemdetails.Where(item => item.item == record.Item && item.type == record.DocType && item.name == record.DocName && item.IMType == IMType).ToList();
                         if (existingItems != null && existingItems.Count > 0)
                         {
                             foreach (var existingItem in existingItems)
@@ -759,6 +814,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                             f12.type= record.DocType; 
                             f12.name = record.DocName; 
                             f12.details_or_url = record.DocDetailsUrl;
+                            f12.IMType = IMType;
                             context.itemdetails.Add(f12);
                             context.SaveChanges();
                         }

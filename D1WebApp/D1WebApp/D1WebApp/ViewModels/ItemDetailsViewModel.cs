@@ -9,13 +9,15 @@ namespace D1WebApp.BusinessLogicLayer.ViewModels
 {
     public class ItemDetailsViewModel
     {
+        public int TotalPage { get; set; }
         public string memRefNo { get; set; }
-        public int ItemDocId { get; set; }
+        public long ItemDocId { get; set; }
         public string Item { get; set; }
         public string DocType { get; set; }
         public string DocName { get; set; }
         public string DocDetailsUrl { get; set; }
-        public int Sequence { get; set; }
+        public int? Sequence { get; set; }
+        public bool? IMType { get; set; }
     }
 
     public class ItemPriceListModel 

@@ -175,6 +175,7 @@
     <Property Name="SchedulerTime" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="SchedulerTables" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="UserId" Type="Int64" />
+    <Property Name="Active" Type="Boolean" />
   </EntityType>
   <EntityType Name="MailBox">
     <Key>

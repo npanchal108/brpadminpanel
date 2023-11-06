@@ -349,6 +349,7 @@
     <Property Name="phone_ext" Type="varchar" MaxLength="1500" />
     <Property Name="cell" Type="varchar" MaxLength="1500" />
     <Property Name="profile_log" Type="varchar" MaxLength="2000" />
+    <Property Name="timestamp" Type="datetime" />
   </EntityType>
   <EntityType Name="customer">
     <Key>
@@ -1056,6 +1057,7 @@
     <Property Name="name" Type="varchar" MaxLength="500" />
     <Property Name="details_or_url" Type="nvarchar(max)" />
     <Property Name="sequence" Type="int" />
+    <Property Name="IMType" Type="bit" />
   </EntityType>
   <EntityType Name="ItemSummery">
     <Key>
@@ -1523,6 +1525,8 @@
     <Property Name="name" Type="varchar" MaxLength="500" />
     <Property Name="provider" Type="varchar" MaxLength="500" />
     <Property Name="providercode" Type="varchar" MaxLength="500" />
+    <Property Name="Markup" Type="int" />
+    <Property Name="type" Type="int" />
   </EntityType>
   <EntityType Name="SouthernPunchOutSession">
     <Key>
@@ -2369,6 +2373,7 @@
     <Parameter Name="company_it" Type="varchar" Mode="In" />
     <Parameter Name="pageno" Type="int" Mode="In" />
     <Parameter Name="pagesize" Type="int" Mode="In" />
+    <Parameter Name="satagsdetails" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="AdvanceSerchcount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="keywords" Type="varchar(max)" Mode="In" />
@@ -2380,6 +2385,7 @@
     <Parameter Name="warehouse" Type="varchar" Mode="In" />
     <Parameter Name="company_cu" Type="varchar" Mode="In" />
     <Parameter Name="company_it" Type="varchar" Mode="In" />
+    <Parameter Name="satagsdetails" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="CapitalizeFirstLetter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
     <Parameter Name="string" Type="varchar" Mode="In" />
@@ -2687,6 +2693,7 @@
     <Parameter Name="company_cu" Type="varchar" Mode="In" />
     <Parameter Name="hideunavail" Type="bit" Mode="In" />
     <Parameter Name="usercode" Type="varchar" Mode="In" />
+    <Parameter Name="satagsdetails" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="SearchAllTablesCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="words" Type="nvarchar" Mode="In" />
@@ -2696,6 +2703,7 @@
     <Parameter Name="company_cu" Type="varchar" Mode="In" />
     <Parameter Name="hideunavail" Type="bit" Mode="In" />
     <Parameter Name="usercode" Type="varchar" Mode="In" />
+    <Parameter Name="satagsdetails" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="SearchAllTablesforheader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="words" Type="nvarchar" Mode="In" />

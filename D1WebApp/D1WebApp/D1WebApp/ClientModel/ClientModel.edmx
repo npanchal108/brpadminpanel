@@ -354,6 +354,7 @@
           <Property Name="phone_ext" Type="varchar" MaxLength="1500" />
           <Property Name="cell" Type="varchar" MaxLength="1500" />
           <Property Name="profile_log" Type="varchar" MaxLength="2000" />
+          <Property Name="timestamp" Type="datetime" />
         </EntityType>
         <EntityType Name="customer">
           <Key>
@@ -1061,6 +1062,7 @@
           <Property Name="name" Type="varchar" MaxLength="500" />
           <Property Name="details_or_url" Type="nvarchar(max)" />
           <Property Name="sequence" Type="int" />
+          <Property Name="IMType" Type="bit" />
         </EntityType>
         <EntityType Name="ItemSummery">
           <Key>
@@ -1528,6 +1530,8 @@
           <Property Name="name" Type="varchar" MaxLength="500" />
           <Property Name="provider" Type="varchar" MaxLength="500" />
           <Property Name="providercode" Type="varchar" MaxLength="500" />
+          <Property Name="Markup" Type="int" />
+          <Property Name="type" Type="int" />
         </EntityType>
         <EntityType Name="SouthernPunchOutSession">
           <Key>
@@ -2374,6 +2378,7 @@
           <Parameter Name="company_it" Type="varchar" Mode="In" />
           <Parameter Name="pageno" Type="int" Mode="In" />
           <Parameter Name="pagesize" Type="int" Mode="In" />
+          <Parameter Name="satagsdetails" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="AdvanceSerchcount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="keywords" Type="varchar(max)" Mode="In" />
@@ -2385,6 +2390,7 @@
           <Parameter Name="warehouse" Type="varchar" Mode="In" />
           <Parameter Name="company_cu" Type="varchar" Mode="In" />
           <Parameter Name="company_it" Type="varchar" Mode="In" />
+          <Parameter Name="satagsdetails" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="CapitalizeFirstLetter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="string" Type="varchar" Mode="In" />
@@ -2692,6 +2698,7 @@
           <Parameter Name="company_cu" Type="varchar" Mode="In" />
           <Parameter Name="hideunavail" Type="bit" Mode="In" />
           <Parameter Name="usercode" Type="varchar" Mode="In" />
+          <Parameter Name="satagsdetails" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="SearchAllTablesCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="words" Type="nvarchar" Mode="In" />
@@ -2701,6 +2708,7 @@
           <Parameter Name="company_cu" Type="varchar" Mode="In" />
           <Parameter Name="hideunavail" Type="bit" Mode="In" />
           <Parameter Name="usercode" Type="varchar" Mode="In" />
+          <Parameter Name="satagsdetails" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="SearchAllTablesforheader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="words" Type="nvarchar" Mode="In" />
@@ -2914,6 +2922,7 @@
             <Parameter Name="company_it" Mode="In" Type="String" />
             <Parameter Name="pageno" Mode="In" Type="Int32" />
             <Parameter Name="pagesize" Mode="In" Type="Int32" />
+            <Parameter Name="satagsdetails" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetBrandListForProductsMenu" ReturnType="Collection(ClientModel.GetBrandListForProductsMenu_Result)" >
             <Parameter Name="warehouse" Mode="In" Type="String" />
@@ -3060,6 +3069,7 @@
             <Parameter Name="company_cu" Mode="In" Type="String" />
             <Parameter Name="hideunavail" Mode="In" Type="Boolean" />
             <Parameter Name="usercode" Mode="In" Type="String" />
+            <Parameter Name="satagsdetails" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_GetCartItems" ReturnType="Collection(ClientModel.usp_GetCartItems_Result)">
             <Parameter Name="userId" Mode="In" Type="String" />
@@ -3205,6 +3215,7 @@
             <Parameter Name="company_cu" Mode="In" Type="String" />
             <Parameter Name="hideunavail" Mode="In" Type="Boolean" />
             <Parameter Name="usercode" Mode="In" Type="String" />
+            <Parameter Name="satagsdetails" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="DeleteCuUserShipMapping">
             <Parameter Name="userid" Mode="In" Type="String" />
@@ -3246,6 +3257,7 @@
             <Parameter Name="warehouse" Mode="In" Type="String" />
             <Parameter Name="company_cu" Mode="In" Type="String" />
             <Parameter Name="company_it" Mode="In" Type="String" />
+            <Parameter Name="satagsdetails" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="createvalidateurlfile" ReturnType="Collection(String)" />
           <FunctionImport Name="GetChildItems">
@@ -4691,6 +4703,7 @@
           <Property Name="phone_ext" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
           <Property Name="cell" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
           <Property Name="profile_log" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="timestamp" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="customer">
           <Key>
@@ -5854,6 +5867,8 @@
           <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="provider" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="providercode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Markup" Type="Int32" />
+          <Property Name="type" Type="Int32" />
         </EntityType>
         <EntityType Name="SouthernPunchOutSession">
           <Key>
@@ -6697,6 +6712,7 @@
           <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="details_or_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="sequence" Type="Int32" />
+          <Property Name="IMType" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -8169,6 +8185,7 @@
           <EntitySetMapping Name="cu_user">
             <EntityTypeMapping TypeName="ClientModel.cu_user">
               <MappingFragment StoreEntitySet="cu_user">
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
                 <ScalarProperty Name="profile_log" ColumnName="profile_log" />
                 <ScalarProperty Name="cell" ColumnName="cell" />
                 <ScalarProperty Name="phone_ext" ColumnName="phone_ext" />
@@ -9383,6 +9400,8 @@
           <EntitySetMapping Name="shipvia_mapping">
             <EntityTypeMapping TypeName="ClientModel.shipvia_mapping">
               <MappingFragment StoreEntitySet="shipvia_mapping">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="Markup" ColumnName="Markup" />
                 <ScalarProperty Name="providercode" ColumnName="providercode" />
                 <ScalarProperty Name="provider" ColumnName="provider" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -10250,6 +10269,7 @@
           <EntitySetMapping Name="itemdetails">
             <EntityTypeMapping TypeName="ClientModel.itemdetail">
               <MappingFragment StoreEntitySet="itemdetails">
+                <ScalarProperty Name="IMType" ColumnName="IMType" />
                 <ScalarProperty Name="sequence" ColumnName="sequence" />
                 <ScalarProperty Name="details_or_url" ColumnName="details_or_url" />
                 <ScalarProperty Name="name" ColumnName="name" />

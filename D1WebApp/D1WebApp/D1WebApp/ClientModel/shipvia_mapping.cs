@@ -19,5 +19,7 @@ namespace D1WebApp.ClientModel
         public string name { get; set; }
         public string provider { get; set; }
         public string providercode { get; set; }
+        public Nullable<int> Markup { get; set; }
+        public Nullable<int> type { get; set; }
     }
 }
