@@ -241,6 +241,7 @@ namespace D1WebApp.DataAccessLayer.Repositories
                         DocName = itm.name,
                         DocDetailsUrl = itm.details_or_url,
                         Sequence = itm.sequence,
+                        IMType = itm.IMType
 
                     }).Where(p => p.IMType == true).OrderByDescending(c => c.ItemDocId)
                     .Skip((pageno - 1) * 50)
